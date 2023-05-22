@@ -51,6 +51,10 @@ void reset() {
   background(10,150, 200);
 }
 
+int displayHighScore() {
+
+}
+
 void newHighScore(int score) {
   if (score > highScore) {
     highScore = score;
