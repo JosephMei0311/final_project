@@ -1,4 +1,4 @@
-PVector gravity = new PVector(0, 1);
+PVector gravity = new PVector(0, 10);
 boolean isGround = true;
 boolean start = false;
 int score = 0;
@@ -21,9 +21,10 @@ void frameCount()  {
 }
 
 void jump() {
-  //while(height/2 - charHeight != jumpHeight) {
-    
-  //}
+  if(isGround) {
+        player.posY = 100;
+        isGround = false;
+  }
 }
 
 void setup() {
@@ -37,7 +38,7 @@ void draw() {
   background(10,150, 200);
   if(start) { // Start Game on Key Press
       if(!isGround){
-       player.posY++;
+       player.posY += gravity.y;
        if(player.posY == height / 1.25 - player.radius) {
          isGround = true;
        }
@@ -59,7 +60,7 @@ void reset() {
 }
 
 int displayHighScore() {
-
+  return 0;
 }
 
 void newHighScore(int score) {
@@ -75,17 +76,14 @@ void keyPressed() {
       System.out.println(start);
     }
     else if (keyCode == UP) {
-      if(isGround) {
-        player.posY = 100;
-        isGround = false;
-      }
+      jump();
       System.out.println("Going up!");
     }
     else if (keyCode == DOWN) {
       System.out.println("Landing/Ducking!");
     }
-    else if (keyCode == 'R') {
+  }
+    if (key == 'r') {
       reset();
     }
   }
-}
