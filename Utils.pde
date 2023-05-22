@@ -1,4 +1,4 @@
-class Utils {
+public class Utils {
   double getMax(double num1, double num2) {
     if(num1 > num2)
       return num1;

@@ -1,43 +1,49 @@
-PVector gravity;
+PVector gravity = new PVector(0, 1);
 boolean isGround = true;
 boolean start = false;
 int score = 0;
-int highScore;
+int highScore = 0;
 double timeMS;
-boolean hit;
+boolean hit = false;
+int w = 1500;
 int textureType;
-PImage pPic;
 Player player;
 PImage treePic;
 Tree tree;
 PImage cactPic;
 Cactus cactus;
 PImage longCactPic;
+LongCactus longCactus;
 PImage cloudPic;
-Cloud cloud;
+CloudEl cloud;
 
 void frameCount()  {
 }
 
 void jump() {
-  while(height/2 - charHeight != jumpHeight) {
+  //while(height/2 - charHeight != jumpHeight) {
     
-  }
+  //}
 }
 
 void setup() {
-  size(800,400);
+  size(1500,600);
   background(10,150, 200);
-  PImage dino = loadImage("mushDino.jpg");
+  player = new Player();
   imageMode(CORNER);
-  image(dino, 0, height/2 - charHeight, charWidth, charHeight);
 }
 
 void draw() {
-  //drawline
-  line(0,height/2, width, height/2);
-  beginShape();
-  endShape();
+  if(start) { // Start Game on Key Press
+      
+  //draw line
+  line(0, height/1.25, width, height/1.25);
+  
+  player.display();
+  
+  
+  
+  }
 }
 
 void reset() {
@@ -58,6 +64,9 @@ void keyPressed() {
       System.out.println(start);
     }
     else if (keyCode == UP) {
+      if(isGround) {
+        player.posY = 100;
+      }
       System.out.println("Going up!");
     }
     else if (keyCode == DOWN) {

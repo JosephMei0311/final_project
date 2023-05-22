@@ -1,8 +1,8 @@
-class Cactus {
+public class Cactus {
   PImage cactPic;
-  ArrayList(PImage) textures;
-  double width = 40;
-  double height;
+  ArrayList<PImage> textures = new ArrayList<PImage>();
+  double w = 40;
+  double h;
   double xpos;
   
   void swapTexture() {
@@ -10,7 +10,7 @@ class Cactus {
   }
   
   boolean hit(Player p) {
-  
+    return true;
   }
   
   void move() {
