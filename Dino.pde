@@ -34,8 +34,15 @@ void setup() {
 }
 
 void draw() {
+  background(10,150, 200);
   if(start) { // Start Game on Key Press
-      
+      if(!isGround){
+       player.posY++;
+       if(player.posY == height / 1.25 - player.radius) {
+         isGround = true;
+       }
+       
+      }
   //draw line
   line(0, height/1.25, width, height/1.25);
   
@@ -66,6 +73,7 @@ void keyPressed() {
     else if (keyCode == UP) {
       if(isGround) {
         player.posY = 100;
+        isGround = false;
       }
       System.out.println("Going up!");
     }
