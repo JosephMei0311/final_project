@@ -1,5 +1,4 @@
 class Player {
-
   PImage dinoPic;
   //ArrayList(PImage) textures;
   double radius;

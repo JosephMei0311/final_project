@@ -1,17 +1,20 @@
-PImage cloudPic;
-ArrayList(PImage) textures;
-double width;
-double height;
-double pos;
-
-void swapTexture() {
-
-}
-
-void move() {
-
-}
-
-void display() {
-
+class Cloud {
+  PImage cloudPic;
+  ArrayList<PImage> textures = new ArrayList<PImage>();
+  double width = 40; //stub
+  double height = 20; // stub
+  double xpos;
+  double ypos;
+  
+  void swapTexture() {
+  
+  }
+  
+  void move() {
+  
+  }
+  
+  void display() {
+  
+  }
 }
