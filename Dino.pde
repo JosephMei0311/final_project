@@ -13,9 +13,9 @@ Tree tree;
 PImage cactPic;
 Cactus cactus;
 PImage longCactPic;
-longCactus LongCactus;
+LongCactus longCactus;
 PImage cloudPic;
-CloudEl cloud;
+Cloud cloud;
 
 void frameCount()  {
 }
