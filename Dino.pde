@@ -15,7 +15,7 @@ Cactus cactus;
 PImage longCactPic;
 LongCactus longCactus;
 PImage cloudPic;
-CloudEl cloud;
+Cloud cloud;
 
 void frameCount()  {
 }
@@ -56,6 +56,10 @@ void draw() {
 void reset() {
   size(800,400);
   background(10,150, 200);
+}
+
+int displayHighScore() {
+
 }
 
 void newHighScore(int score) {
