@@ -1,10 +1,29 @@
-boolean start = false;
-boolean isGround = true;
 PVector gravity;
-PVector acceleration; //<>//
-int charWidth = 100;
-int charHeight = 100; 
-int jumpHeight;
+boolean isGround = true;
+boolean start = false;
+int score = 0;
+int highScore;
+double timeMS;
+boolean hit;
+int textureType;
+PImage pPic;
+player Player;
+PImage treePic;
+Tree tree;
+PImage cactPic;
+Cactus cactus;
+PImage longCactPic;
+PImage cloudPic;
+Cloud cloud;
+
+void frameCount()  {
+}
+
+void jump() {
+  while(height/2 - charHeight != jumpHeight) {
+    
+  }
+}
 
 void setup() {
   size(800,400);
@@ -29,12 +48,6 @@ void reset() {
 void newHighScore(int score) {
   if (score > highScore) {
     highScore = score;
-  }
-}
-
-void jump() {
-  while(height/2 - charHeight != jumpHeight) {
-    
   }
 }
 
