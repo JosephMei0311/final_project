@@ -13,7 +13,7 @@ Tree tree;
 PImage cactPic;
 Cactus cactus;
 PImage longCactPic;
-LongCactus longCactus;
+longCactus LongCactus;
 PImage cloudPic;
 CloudEl cloud;
 
