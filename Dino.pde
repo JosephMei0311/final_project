@@ -7,7 +7,7 @@ double timeMS;
 boolean hit;
 int textureType;
 PImage pPic;
-player Player;
+Player player;
 PImage treePic;
 Tree tree;
 PImage cactPic;
@@ -52,17 +52,19 @@ void newHighScore(int score) {
 }
 
 void keyPressed() {
-  if (keyCode == RIGHT) {
-    start = true;
-    System.out.println(start);
-  }
-  else if (keyCode == UP) {
-    System.out.println("Going up!");
-  }
-  else if (keyCode == DOWN) {
-    System.out.println("Landing/Ducking!");
-  }
-  else if (keyCode == 'R') {
-    reset();
+  if(key == CODED) {
+    if (keyCode == RIGHT) {
+      start = true;
+      System.out.println(start);
+    }
+    else if (keyCode == UP) {
+      System.out.println("Going up!");
+    }
+    else if (keyCode == DOWN) {
+      System.out.println("Landing/Ducking!");
+    }
+    else if (keyCode == 'R') {
+      reset();
+    }
   }
 }

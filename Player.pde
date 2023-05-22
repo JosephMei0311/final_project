@@ -1,16 +1,21 @@
-PImage dinoPic;
-ArrayList(PImage) textures;
-double radius;
-double speed;
-double pos;
-int jumpHeight;
+class Player {
 
-void move() {
-}
+  PImage dinoPic;
+  //ArrayList(PImage) textures;
+  double radius;
+  double speed;
+  double pos;
+  int jumpHeight;
+  
+  void move() {
+  }
+  
+  void display() {
+  
+  }
+  void swapTexture() {
+  
+  }
 
-void display() {
-
-}
-void swapTexture() {
 
 }
