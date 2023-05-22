@@ -15,7 +15,7 @@ Cactus cactus;
 PImage longCactPic;
 LongCactus longCactus;
 PImage cloudPic;
-Cloud cloud;
+CloudEl cloud;
 
 void frameCount()  {
 }
@@ -35,8 +35,8 @@ void setup() {
 }
 
 void draw() {
-  background(10,150, 200);
   if(start) { // Start Game on Key Press
+      background(10,150, 200);
       if(!isGround){
        player.posY += gravity.y;
        if(player.posY == height / 1.25 - player.radius) {
@@ -55,8 +55,13 @@ void draw() {
 }
 
 void reset() {
-  size(800,400);
+  start = false;
+  size(1500,600);
   background(10,150, 200);
+  player = new Player();
+  imageMode(CORNER);
+  player.display();
+  line(0, height/1.25, width, height/1.25);
 }
 
 int displayHighScore() {
@@ -83,7 +88,7 @@ void keyPressed() {
       System.out.println("Landing/Ducking!");
     }
   }
-    if (key == 'r') {
+    if (key == 'r' || key == 'R') {
       reset();
     }
   }
