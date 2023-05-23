@@ -9,15 +9,9 @@ int w = 1500;
 int textureType;
 PlayerEl player;
 TreeEl tree;
-<<<<<<< HEAD
-Cactus cactus;
-LongCactusEl longCactus;
-CloudEl cloud;
-=======
 CactusEl cactus;
 LongCactusEl longCactus;
 BackgroundEl bg;
->>>>>>> ede7f996a26df7cc31626d51dbde9f817c1fd3c6
 
 void frameCount()  {
 }
@@ -33,10 +27,7 @@ void setup() {
   size(1500,600);
   background(10,150, 200);
   player = new PlayerEl();
-<<<<<<< HEAD
-=======
   bg = new BackgroundEl();
->>>>>>> ede7f996a26df7cc31626d51dbde9f817c1fd3c6
   imageMode(CORNER);
 }
 
