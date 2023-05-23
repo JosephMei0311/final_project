@@ -1,4 +1,4 @@
-public class Tree {
+public class TreeEl {
   PImage treePic;
   ArrayList<PImage> textures = new ArrayList<PImage>();
   double w;
@@ -9,7 +9,7 @@ public class Tree {
   
   }
   
-  boolean hit(Player p) {
+  boolean hit(PlayerEl p) {
     return true;
   }
   

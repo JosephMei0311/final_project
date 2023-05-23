@@ -1,8 +1,8 @@
-public class LongCactus extends Obstacle{
+public class LongCactusEl extends ObstacleEl{
   ArrayList<PImage> textures = new ArrayList<PImage>();  
   
-  public LongCactus() {
-      super(40, 20);
+  public LongCactusEl() {
+      super(40.0, 20.0);
   }
   
   
@@ -10,7 +10,7 @@ public class LongCactus extends Obstacle{
   
   }
   
-  boolean hit(Player p) {
+  boolean hit(PlayerEl p) {
     return true;
   }
   

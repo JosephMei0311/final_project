@@ -1,4 +1,4 @@
-class Player {
+class PlayerEl {
   PImage dinoPic = loadImage("mushDino.png");
   //ArrayList(PImage) textures;
   float radius = 80;
@@ -7,7 +7,7 @@ class Player {
   float posY;
   int jumpHeight;
   
-  Player() {
+  PlayerEl() {
     posX = 40;
     posY = height / 1.25 - radius;
     speed = 20;

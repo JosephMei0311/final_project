@@ -1,11 +1,11 @@
-abstract class Obstacle {
+abstract class ObstacleEl {
   PImage pic;
   ArrayList<PImage> textures;
-  double w;
-  double h;
+  float w;
+  float h;
   double xpos;
   
-  public Obstacle(double wid, double hei) {
+  public ObstacleEl(float wid, float hei) {
     w = wid;
     h = hei;
     xpos = 100;
@@ -17,7 +17,7 @@ abstract class Obstacle {
   
   }
   
-  boolean hit(Player p) {
+  boolean hit(PlayerEl p) {
     return true;
   }
   
