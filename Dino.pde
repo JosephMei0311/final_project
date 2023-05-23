@@ -7,14 +7,10 @@ double timeMS;
 boolean hit = false;
 int w = 1500;
 int textureType;
-Player player;
-PImage treePic;
-Tree tree;
-PImage cactPic;
+PlayerEl player;
+TreeEl tree;
 Cactus cactus;
-PImage longCactPic;
-LongCactus longCactus;
-PImage cloudPic;
+LongCactusEl longCactus;
 CloudEl cloud;
 
 void frameCount()  {
@@ -30,7 +26,7 @@ void jump() {
 void setup() {
   size(1500,600);
   background(10,150, 200);
-  player = new Player();
+  player = new PlayerEl();
   imageMode(CORNER);
 }
 
@@ -49,8 +45,6 @@ void draw() {
   
   player.display();
   
-  
-  
   }
 }
 
@@ -58,7 +52,7 @@ void reset() {
   start = false;
   size(1500,600);
   background(10,150, 200);
-  player = new Player();
+  player = new PlayerEl();
   imageMode(CORNER);
   player.display();
   line(0, height/1.25, width, height/1.25);

@@ -9,7 +9,7 @@ public class CactusEl {
   
   }
   
-  boolean hit(Player p) {
+  boolean hit(PlayerEl p) {
     return true;
   }
   

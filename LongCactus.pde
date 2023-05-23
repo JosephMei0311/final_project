@@ -1,4 +1,4 @@
-public class LongCactus {
+public class LongCactusEl {
   PImage longCactPic;
   ArrayList<PImage> textures = new ArrayList<PImage>();
   double w = 40;
@@ -9,7 +9,7 @@ public class LongCactus {
   
   }
   
-  boolean hit(Player p) {
+  boolean hit(PlayerEl p) {
     return true;
   }
   
