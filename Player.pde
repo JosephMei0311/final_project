@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 public class PlayerEl {
   PImage dinoPic = loadImage("mushDino.jpg");
+=======
+class PlayerEl {
+  PImage dinoPic = loadImage("mushDino.png");
+>>>>>>> ede7f996a26df7cc31626d51dbde9f817c1fd3c6
   //ArrayList(PImage) textures;
   float radius = 80;
   float speed;
