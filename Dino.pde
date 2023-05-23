@@ -15,7 +15,7 @@ Cactus cactus;
 PImage longCactPic;
 LongCactus longCactus;
 PImage cloudPic;
-CloudEl cloud;
+//CloudEl cloud;
 
 void frameCount()  {
 }

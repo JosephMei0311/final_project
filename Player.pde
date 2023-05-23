@@ -1,5 +1,5 @@
 class Player {
-  PImage dinoPic = loadImage("mushDino.jpg");
+  PImage dinoPic = loadImage("mushDino.png");
   //ArrayList(PImage) textures;
   float radius = 80;
   float speed;

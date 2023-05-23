@@ -1,4 +1,4 @@
-public class CactusEl {
+public class CactusEL {
   PImage cactPic;
   ArrayList<PImage> textures = new ArrayList<PImage>();
   double w = 40;
