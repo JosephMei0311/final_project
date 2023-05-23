@@ -1,9 +1,10 @@
-public class LongCactus {
-  PImage longCactPic;
-  ArrayList<PImage> textures = new ArrayList<PImage>();
-  double w = 40;
-  double h;
-  double xpos;
+public class LongCactus extends Obstacle{
+  ArrayList<PImage> textures = new ArrayList<PImage>();  
+  
+  public LongCactus() {
+      super(40, 20);
+  }
+  
   
   void swapTexture() {
   

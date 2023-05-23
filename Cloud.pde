@@ -1,4 +1,4 @@
-public class CloudEl {
+public class BackgroundEl {
   PImage cloudPic;
   ArrayList<PImage> textures = new ArrayList<PImage>();
   double w = 40; //stub
