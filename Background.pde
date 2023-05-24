@@ -16,4 +16,9 @@ public class BackgroundEl {
   void display() {
     ellipse(xpos, ypos, w, h);
   }
+  
+  void drawPebbles(float x, int y) {
+    strokeWeight(4);
+    line(x, y, x, y-5);
+  }
 }
