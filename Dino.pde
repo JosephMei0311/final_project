@@ -63,8 +63,13 @@ void draw() {
      temp.move();
   }
   player.display();
-  
   }
+  int xpos = width;
+  float r = random(10);
+    while(xpos != 0) {
+      bg.drawPebbles(xpos, 490);
+      xpos -= r;
+    }
 }
 
 void reset() {
