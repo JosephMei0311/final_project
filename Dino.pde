@@ -1,10 +1,10 @@
 PVector gravity = new PVector(0, 10);
-boolean isGround = true;
-boolean start = false;
-int score = 0;
-int highScore = 0;
-double timeMS;
-boolean hit = false;
+boolean isGround = true; // Player Only Jumps when on Ground
+boolean start = false; // Starts Game when true
+int score = 0; // score
+int highScore = 0; // high score
+double timeMS; // time in MS
+boolean hit = false; // 
 int w = 1500;
 int textureType;
 PlayerEl player;
@@ -12,6 +12,7 @@ TreeEl tree;
 CactusEl cactus;
 LongCactusEl longCactus;
 BackgroundEl bg;
+ArrayList<BackgroundEl> bgarr = new ArrayList<BackgroundEl>();
 
 void frameCount()  {
 }
@@ -32,8 +33,10 @@ void setup() {
 }
 
 void draw() {
+  
   if(start) { // Start Game on Key Press
       background(10,150, 200);
+      text(frameCount/60.0, 5, 20);
       if(!isGround){
        player.posY += gravity.y;
        if(player.posY == height / 1.25 - player.radius) {
@@ -44,8 +47,21 @@ void draw() {
   //draw line
   line(0, height/1.25, width, height/1.25);
   
-  bg.display();
-  bg.move();
+  //bg.display();
+  //bg.move();
+  
+  if(frameCount % 30 == 0) {
+  bgarr.add(new BackgroundEl());
+  }
+  
+  
+  
+  
+  for(int x = 0; x < bgarr.size(); x++){
+     BackgroundEl temp = bgarr.get(x);
+     temp.display();
+     temp.move();
+  }
   player.display();
   
   }

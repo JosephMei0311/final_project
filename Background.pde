@@ -3,8 +3,8 @@ public class BackgroundEl {
   ArrayList<PImage> textures = new ArrayList<PImage>();
   float w = 40; //stub
   float h = 20; // stub
-  float xpos = 1000;
-  float ypos = 40;
+  float xpos = width;
+  float ypos = 80;
 
   void swapTexture() {
   }
