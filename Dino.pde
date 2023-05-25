@@ -36,7 +36,13 @@ void draw() {
   
   if(start) { // Start Game on Key Press
       background(10,150, 200);
-      text(frameCount/60.0, 5, 20);
+      textSize(25);
+      PFont font;
+      font = createFont("ColonnaMT-48.vlw", 25);
+      textFont(font);
+      fill(0, 408, 612);
+      text("Score: " + displayScore(), width/2, 30);
+      
       if(!isGround){
        player.posY += gravity.y;
        if(player.posY == height / 1.25 - player.radius) {
@@ -55,15 +61,24 @@ void draw() {
   }
   
   
-  
-  
-  //for(int x = 0; x < bgarr.size(); x++){
-  //   BackgroundEl temp = bgarr.get(x);
-  //   temp.display();
-  //   temp.move();
-  //}
+  for(int x = 0; x < bgarr.size(); x++){
+   temp.move();
+   BackgroundEl temp = bgarr.get(x);
+   background(10,150, 200);
+   
+   temp.display();
+   
+   line(0, height/1.25, width, height/1.25);
+   temp.move();
+   temp.display();
+   
+   
+
+  }
+
   player.display();
   }
+
   //int xpos = width;
   //float r = random(10);
   //  while(xpos != 0) {
@@ -72,24 +87,33 @@ void draw() {
   //  }
 }
 
-void reset() {
-  start = false;
+void reset() { //If we press it a bunch the Dino sometimes spawns belowground and falls;
+  //start = false;
+  start = true;
   size(1500,600);
   background(10,150, 200);
   player = new PlayerEl();
   imageMode(CORNER);
   player.display();
   line(0, height/1.25, width, height/1.25);
+  frameCount = 0;
+  
+  
 }
 
-int displayHighScore() {
-  return 0;
+int displayScore() { //Need to fix this in reset() since the frameCount will not reset, making the score remain the same
+  score = frameCount/60;
+  if(hit) {
+   newHighScore(score); 
+  }
+  return score;
 }
 
 void newHighScore(int score) {
   if (score > highScore) {
     highScore = score;
   }
+  text("High Score:  " + highScore, width/2 + 50, 30);
 }
 
 void keyPressed() {
@@ -108,5 +132,6 @@ void keyPressed() {
   }
     if (key == 'r' || key == 'R') {
       reset();
+      System.out.println("reset");
     }
   }
