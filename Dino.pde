@@ -1,4 +1,4 @@
-PVector gravity = new PVector(0, .1);
+PVector gravity = new PVector(0, .15);
 boolean isGround = true; // Player Only Jumps when on Ground
 boolean start = false; // Starts Game when true
 int score = 0;
@@ -36,13 +36,10 @@ void draw() {
       fill(0, 408, 612);
       text("Score: " + displayScore(), width / 2, 30);
       
-      //if(!isGround){
-      // player.posY += gravity.y;
-      // if(player.posY == height / 1.25 - player.radius) {
-      //   isGround = true;
-      // }
+       if(player.pos.y == height / 1.25 - player.radius) {
+         isGround = true;
+       }
        
-      //}
   
   line(0, height/1.25, width, height/1.25); // Draw Line
   
@@ -56,6 +53,10 @@ void draw() {
      BackgroundEl temp = bgarr.get(x);
      temp.display();
      temp.move();
+     if(temp.xpos < -1000) {
+       bgarr.remove(x);
+       x--;
+     }
   }
   
   player.gravity();
@@ -101,7 +102,7 @@ void keyPressed() {
     else if (keyCode == UP) {
       if(isGround) {
         player.applyForce(jumpForce);
-        //isGround = false;
+        isGround = false;
       }
       System.out.println("Going up!");
     }

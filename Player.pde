@@ -30,7 +30,7 @@ class PlayerEl {
       }
    
     vel.add(acc); //in order to update the vel as per acc
-    vel.limit(4); // in order to cap the vel for a smooth run
+    vel.limit(5); // in order to cap the vel for a smooth run
    
     acc.mult(0);
   }
