@@ -1,4 +1,4 @@
-PVector gravity = new PVector(0, 10);
+PVector gravity = new PVector(0, .1);
 boolean isGround = true; // Player Only Jumps when on Ground
 boolean start = false; // Starts Game when true
 int score = 0;
@@ -12,15 +12,9 @@ CactusEl cactus;
 LongCactusEl longCactus;
 BackgroundEl bg;
 ArrayList<BackgroundEl> bgarr = new ArrayList<BackgroundEl>(); // ArrayList of all the background elements
+PVector jumpForce = new PVector(0, -100);
 
 void frameCount()  {
-}
-
-void jump() { // (WIP)
-  if(isGround) {
-        player.posY = 100;
-        isGround = false;
-  }
 }
 
 void setup() {
@@ -42,13 +36,13 @@ void draw() {
       fill(0, 408, 612);
       text("Score: " + displayScore(), width / 2, 30);
       
-      if(!isGround){
-       player.posY += gravity.y;
-       if(player.posY == height / 1.25 - player.radius) {
-         isGround = true;
-       }
+      //if(!isGround){
+      // player.posY += gravity.y;
+      // if(player.posY == height / 1.25 - player.radius) {
+      //   isGround = true;
+      // }
        
-      }
+      //}
   
   line(0, height/1.25, width, height/1.25); // Draw Line
   
@@ -64,15 +58,9 @@ void draw() {
      temp.move();
   }
   
+  player.gravity();
   player.display();
   }
-
-  //int xpos = width;
-  //float r = random(10);
-  //  while(xpos != 0) {
-  //    bg.drawPebbles(xpos, 490);
-  //    xpos -= r;
-  //  }
 }
 
 void reset() { //If we press it a bunch the Dino sometimes spawns belowground and falls;
@@ -111,7 +99,10 @@ void keyPressed() {
       System.out.println(start);
     }
     else if (keyCode == UP) {
-      jump();
+      if(isGround) {
+        player.applyForce(jumpForce);
+        //isGround = false;
+      }
       System.out.println("Going up!");
     }
     else if (keyCode == DOWN) {
