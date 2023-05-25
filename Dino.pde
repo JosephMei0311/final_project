@@ -40,7 +40,7 @@ void draw() {
       font = createFont("ColonnaMT-48.vlw", 25);
       textFont(font);
       fill(0, 408, 612);
-      text("Score: " + displayScore(), width/2, 30);
+      text("Score: " + displayScore(), width / 2, 30);
       
       if(!isGround){
        player.posY += gravity.y;
@@ -90,7 +90,7 @@ void reset() { //If we press it a bunch the Dino sometimes spawns belowground an
 }
 
 int displayScore() { //Need to fix this in reset() since the frameCount will not reset, making the score remain the same
-  score = frameCount/60;
+  score = frameCount/10;
   if(hit) {
    newHighScore(score); 
   }
