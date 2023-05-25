@@ -57,8 +57,6 @@ void draw() {
   }
   
   
-<<<<<<< HEAD
-  
   
   for(int x = 0; x < bgarr.size(); x++){
      BackgroundEl temp = bgarr.get(x);
@@ -66,24 +64,6 @@ void draw() {
      temp.move();
   }
   
-  
-=======
-  for(int x = 0; x < bgarr.size(); x++){
-   temp.move();
-   BackgroundEl temp = bgarr.get(x);
-   background(10,150, 200);
-   
-   temp.display();
-   
-   line(0, height/1.25, width, height/1.25);
-   temp.move();
-   temp.display();
-   
-   
-
-  }
-
->>>>>>> 884ddd5a52a1cb5999234e6285c4bcedf49fdb57
   player.display();
   }
 
