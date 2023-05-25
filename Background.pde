@@ -4,21 +4,31 @@ public class BackgroundEl {
   float w = 40; //stub
   float h = 20; // stub
   float xpos = width;
-  float ypos = 80;
+  float yposCl = 80;
+  float yposGr = random(height/1.25, height);
+  float yposGr1 = random(height/1.25, height);
+  float yposGr2 = random(height/1.25, height);
+  float xposGr = random(150) + width;
+  float xposGr2 = random(250) + width + 50;
 
   void swapTexture() {
   }
 
   void move() {
-    xpos -= 2;
+    xpos -= 5;
+    xposGr -= 5;
+    xposGr2 -= 5;
   }
 
   void display() {
-    ellipse(xpos, ypos, w, h);
+    strokeWeight(4);
+    ellipse(xpos, yposCl, w, h);
+    line(xpos, yposGr, xpos, yposGr);
+    line(xposGr, yposGr1, xposGr, yposGr1);
+    line(xposGr2, yposGr2, xposGr2, yposGr2);
   }
   
-  void drawPebbles(float x, int y) {
-    strokeWeight(4);
-    line(x, y, x, y-5);
+  void drawPebbles() {
+    
   }
 }

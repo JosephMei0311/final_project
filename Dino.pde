@@ -1,23 +1,22 @@
 PVector gravity = new PVector(0, 10);
 boolean isGround = true; // Player Only Jumps when on Ground
 boolean start = false; // Starts Game when true
-int score = 0; // score
-int highScore = 0; // high score
-double timeMS; // time in MS
-boolean hit = false; // 
-int w = 1500;
-int textureType;
+int score = 0;
+int highScore = 0;
+double timeMS;
+boolean hit = false; // Player runs into obstacle
+int textureType; // Selects the texture
 PlayerEl player;
 TreeEl tree;
 CactusEl cactus;
 LongCactusEl longCactus;
 BackgroundEl bg;
-ArrayList<BackgroundEl> bgarr = new ArrayList<BackgroundEl>();
+ArrayList<BackgroundEl> bgarr = new ArrayList<BackgroundEl>(); // ArrayList of all the background elements
 
 void frameCount()  {
 }
 
-void jump() {
+void jump() { // (WIP)
   if(isGround) {
         player.posY = 100;
         isGround = false;
@@ -44,24 +43,23 @@ void draw() {
        }
        
       }
-  //draw line
-  line(0, height/1.25, width, height/1.25);
   
-  //bg.display();
-  //bg.move();
+  line(0, height/1.25, width, height/1.25); // Draw Line
   
-  if(frameCount % 30 == 0) {
-  bgarr.add(new BackgroundEl());
+  if(frameCount % 100 == 0) {
+    bgarr.add(new BackgroundEl());
   }
   
   
   
   
-  //for(int x = 0; x < bgarr.size(); x++){
-  //   BackgroundEl temp = bgarr.get(x);
-  //   temp.display();
-  //   temp.move();
-  //}
+  for(int x = 0; x < bgarr.size(); x++){
+     BackgroundEl temp = bgarr.get(x);
+     temp.display();
+     temp.move();
+  }
+  
+  
   player.display();
   }
   //int xpos = width;
