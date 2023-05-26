@@ -19,7 +19,9 @@ void frameCount()  {
 
 void setup() {
   size(1500,600);
-  background(10,150, 200);
+  background(200,200, 200);
+  textSize(20);
+  text("PRESS UP ARROW TO START", 0, height/2);
   player = new PlayerEl();
   bg = new BackgroundEl();
   imageMode(CORNER);
@@ -65,8 +67,7 @@ void draw() {
 }
 
 void reset() { //If we press it a bunch the Dino sometimes spawns belowground and falls;
-  //start = false;
-  start = true;
+  start = false;
   size(1500,600);
   background(10,150, 200);
   player = new PlayerEl();
@@ -74,8 +75,7 @@ void reset() { //If we press it a bunch the Dino sometimes spawns belowground an
   player.display();
   line(0, height/1.25, width, height/1.25);
   frameCount = 0;
-  
-  
+ 
 }
 
 int displayScore() { //Need to fix this in reset() since the frameCount will not reset, making the score remain the same
@@ -96,10 +96,10 @@ void newHighScore(int score) {
 void keyPressed() {
   if(key == CODED) {
     if (keyCode == RIGHT) {
-      start = true;
       System.out.println(start);
     }
     else if (keyCode == UP) {
+      start = true;
       if(isGround) {
         player.applyForce(jumpForce);
         isGround = false;
