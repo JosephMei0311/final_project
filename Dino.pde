@@ -13,6 +13,7 @@ LongCactusEl longCactus;
 BackgroundEl bg;
 ArrayList<BackgroundEl> bgarr = new ArrayList<BackgroundEl>(); // ArrayList of all the background elements
 PVector jumpForce = new PVector(0, -100);
+boolean startFrame;
 
 void frameCount()  {
 }
@@ -20,23 +21,28 @@ void frameCount()  {
 void setup() {
   size(1500,600);
   background(200,200, 200);
-  textSize(20);
-  text("PRESS UP ARROW TO START", 0, height/2);
+  PFont font;
+  font = createFont("Papyrus", 50);
+  textFont(font);
+  textAlign(CENTER);
+  text("PRESS UP ARROW TO START", width/2, height/2);
   player = new PlayerEl();
   bg = new BackgroundEl();
   imageMode(CORNER);
+  startFrame = true;
+  
 }
 
 void draw() {
   
   if(start) { // Start Game on Key Press
+    if(startFrame) {
+      frameCount = 0;
+      startFrame = false;
+    }
+    
       background(10,150, 200);
-      textSize(25);
-      PFont font;
-      font = createFont("ColonnaMT-48.vlw", 25);
-      textFont(font);
-      fill(0, 408, 612);
-      text("Score: " + displayScore(), width / 2, 30);
+      displayStats();
       
        if(player.pos.y == height / 1.25 - player.radius) {
          isGround = true;
@@ -55,7 +61,7 @@ void draw() {
      BackgroundEl temp = bgarr.get(x);
      temp.display();
      temp.move();
-     if(temp.xpos < -1000) {
+     if(temp.xposCl < -1000) {
        bgarr.remove(x);
        x--;
      }
@@ -67,30 +73,37 @@ void draw() {
 }
 
 void reset() { //If we press it a bunch the Dino sometimes spawns belowground and falls;
-  start = false;
+  if(score > highScore)
+    highScore = score;
   size(1500,600);
-  background(10,150, 200);
+  background(200,200, 200);
+  PFont font;
+  font = createFont("Papyrus", 50);
+  textFont(font);
+  textAlign(CENTER);
+  text("PRESS UP ARROW TO START", width/2, height/2);
   player = new PlayerEl();
+  bg = new BackgroundEl();
   imageMode(CORNER);
-  player.display();
-  line(0, height/1.25, width, height/1.25);
-  frameCount = 0;
+  startFrame = true;
+  start = false;
+  score = 0;
  
 }
 
-int displayScore() { //Need to fix this in reset() since the frameCount will not reset, making the score remain the same
-  score = frameCount/10;
-  if(hit) {
-   newHighScore(score); 
-  }
-  return score;
+void displayStats() { //Need to fix this in reset() since the frameCount will not reset, making the score remain the same
+  score = frameCount / 10;
+  
+  textAlign(RIGHT);
+  fill(0,0,0);
+  textSize(30);
+  text("Score: " + score, width - 10, 30);
+  textSize(20);
+  fill(255,255,255);
+  text("Highscore: " + highScore, width - 10, 30 + 40);
 }
 
 void newHighScore(int score) {
-  if (score > highScore) {
-    highScore = score;
-  }
-  text("High Score:  " + highScore, width/2 + 50, 30);
 }
 
 void keyPressed() {
