@@ -1,23 +1,12 @@
-public class TreeEl {
+public class TreeEl extends ObstacleEl {
   PImage treePic;
   ArrayList<PImage> textures = new ArrayList<PImage>();
-  double w;
-  double h;
-  double pos;
+  
+  public TreeEl() {
+    super(40, 90, loadImage("tree.png"));
+  }
   
   void swapTexture() {
-  
-  }
-  
-  boolean hit(PlayerEl p) {
-    return true;
-  }
-  
-  void move() {
-  
-  }
-  
-  void display() {
   
   }
 }

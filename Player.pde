@@ -14,38 +14,30 @@ class PlayerEl {
     acc = new PVector();
   }
   
-  void applyForce(PVector force) 
-  {
+  void addForce(PVector force) {
     acc.add(force); 
   }
   
-  void gravity() 
-  {
-    applyForce(gravity); //applies downward gravity
-    pos.add(vel); // in order to update pos wrt velocity
-    if(pos.y >= height / 1.25 - radius) 
-      {
+  void gravity() {
+    addForce(gravity);
+    pos.add(vel); 
+    if(pos.y >= height / 1.25 - radius) {
           pos.y = height / 1.25 - radius;
           vel.mult(0);
-      }
+    }
    
-    vel.add(acc); //in order to update the vel as per acc
-    vel.limit(5); // in order to cap the vel for a smooth run
+    vel.add(acc);
+    vel.limit(10);
    
     acc.mult(0);
   }
  
   
   void display() {
-    fill(255, 0, 34);
-    stroke(0, 0, 0);
-    strokeWeight(2);
     imageMode(CORNER);
     image(dinoPic, pos.x, pos.y, radius, radius);
   }
-  void swapTexture() {
   
+  void swapTexture() {
   }
-
-
 }
