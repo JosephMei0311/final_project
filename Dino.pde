@@ -15,6 +15,7 @@ ArrayList<BackgroundEl> bgarr = new ArrayList<BackgroundEl>(); // ArrayList of a
 PVector jumpForce = new PVector(0, -100);
 boolean startFrame;
 
+
 void frameCount()  {
 }
 
@@ -30,7 +31,6 @@ void setup() {
   bg = new BackgroundEl();
   imageMode(CORNER);
   startFrame = true;
-  
 }
 
 void draw() {
@@ -55,7 +55,10 @@ void draw() {
     bgarr.add(new BackgroundEl());
   }
   
-  
+  TreeEl treeEx = new TreeEl();
+  //if (frameCount % 50 == 0) {
+   treeEx.display(); 
+  //}
   
   for(int x = 0; x < bgarr.size(); x++){
      BackgroundEl temp = bgarr.get(x);
