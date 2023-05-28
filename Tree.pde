@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 public class TreeEl {
   PImage treePic = loadImage("tree.png");
   ArrayList<PImage> textures = new ArrayList<PImage>();
@@ -7,10 +8,18 @@ public class TreeEl {
   float xposTr = width;
   float yposTr = 80;
   float radius = 180;
+public class TreeEl extends ObstacleEl {
+  PImage treePic;
+  ArrayList<PImage> textures = new ArrayList<PImage>();
+  
+  public TreeEl() {
+    super(40, 90, loadImage("tree.png"));
+  }
   
   void swapTexture() {
   
   }
+<<<<<<< HEAD
   
   boolean hit(PlayerEl p) {
     //if (Player.pos.x + radius > treePic.pos.x && Player.pos.y + radius >= treePic.pos.y) {

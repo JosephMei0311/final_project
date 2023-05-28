@@ -1,24 +1,8 @@
-public class CactusEl {
-  PImage cactPic;
+public class CactusEl extends ObstacleEl{
   ArrayList<PImage> textures = new ArrayList<PImage>();
-  double w = 40;
-  double h;
-  double xpos;
   
-  void swapTexture() {
-  
-  }
-  
-  boolean hit(PlayerEl p) {
-    return true;
-  }
-  
-  void move() {
-  
-  }
-  
-  void display() {
-  
+  public CactusEl() {
+    super(60, 60, loadImage("cactus.png"));
   }
   
 }

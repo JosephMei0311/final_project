@@ -1,15 +1,15 @@
 public class BackgroundEl {
-  PImage cloudPic;
-  ArrayList<PImage> textures = new ArrayList<PImage>();
-  float w = 40; //stub
-  float h = 20; // stub
+  PImage cloudPic = loadImage("cloud.png");
+  float w = 80; 
+  float h = 40; 
   float xposCl = width;
   float yposCl = 80;
-  ArrayList<PVector> posList = new ArrayList<PVector>();
+  ArrayList<PVector> dotList = new ArrayList<PVector>();
+  ArrayList<PImage> textures = new ArrayList<PImage>();
   
   public BackgroundEl() {
-  for(int x = 0; x < 10; x++) {
-    posList.add(new PVector(random(1000) + width, random(height/1.25 + 10, height - 10)));
+    for(int x = 0; x < 10; x++) {
+      dotList.add(new PVector(random(int(250 * speed)) + width, random(height/1.25 + 10, height - 10)));
     }
   }
 
@@ -17,22 +17,26 @@ public class BackgroundEl {
   }
 
   void move() {
-    xposCl -= 5;
-    for(int x = 0; x < posList.size(); x++) {
-      posList.set(x, posList.get(x).sub(5, 0));
-      if(posList.get(x).x < 0){
-        posList.remove(x);
+    xposCl -= speed; // Move cloud
+    
+    // Move dots
+    for(int x = 0; x < dotList.size(); x++) {
+      dotList.set(x, dotList.get(x).sub(speed, 0));
+      if(dotList.get(x).x < 0){
+        dotList.remove(x);
         x--;
       }
     }
   }
 
-  void display() {
+  void display() {    ;
+    //ellipse(xposCl, yposCl, w, h);
+    //imageMode(CORNER);
+    image(cloudPic, xposCl, yposCl, w, h);
     strokeWeight(4);
-    fill(0, 255, 0);
-    ellipse(xposCl, yposCl, w, h);
-    for(int x = 0; x < posList.size(); x++) {
-      line(posList.get(x).x, posList.get(x).y, posList.get(x).x, posList.get(x).y);
+    stroke(0);
+    for(int x = 0; x < dotList.size(); x++) {
+      line(dotList.get(x).x, dotList.get(x).y, dotList.get(x).x, dotList.get(x).y);
     }
   }
   
