@@ -107,6 +107,27 @@ void draw() {
   }
 }
 
+void jump() {
+  player.addForce(jumpForce);
+}
+
+void fall() {
+  gravity.add(0,1);
+}
+
+void displayStats() { 
+  score = frameCount / 10; // Score is framecount divided by 10
+  
+  textAlign(RIGHT);
+  fill(0, 0, 0);
+  textSize(30);
+  text("Score: " + score, width - 10, 30);
+  
+  textSize(20);
+  fill(255,255,255);
+  text("Highscore: " + highScore, width - 10, 30 + 40);
+}
+
 void reset() {
   // Reset start screen
   size(1500,600);
@@ -138,33 +159,20 @@ void reset() {
   speed = 8;
 }
 
-void displayStats() { 
-  score = frameCount / 10; // Score is framecount divided by 10
-  
-  textAlign(RIGHT);
-  fill(0, 0, 0);
-  textSize(30);
-  text("Score: " + score, width - 10, 30);
-  
-  textSize(20);
-  fill(255,255,255);
-  text("Highscore: " + highScore, width - 10, 30 + 40);
-}
-
 void keyPressed() {
   if(key == CODED) {
     if (keyCode == UP) {
       start = true; // start game
       
       if(isGround) { // jumps
-        player.addForce(jumpForce);
+        jump();
         isGround = false;
       }
       
       System.out.println("Going up!");
     }
     else if (keyCode == DOWN) {
-      gravity.add(0,1);
+      fall();
       System.out.println("Landing/Ducking!");
     }
   }
