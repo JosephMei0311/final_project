@@ -9,15 +9,6 @@ PlayerEl player;
 TreeEl tree;
 CactusEl cactus;
 LongCactusEl longCactus;
-<<<<<<< HEAD
-BackgroundEl bg;
-ArrayList<BackgroundEl> bgarr = new ArrayList<BackgroundEl>(); // ArrayList of all the background elements
-PVector jumpForce = new PVector(0, -100);
-boolean startFrame;
-
-
-void frameCount()  {
-}
 ArrayList<BackgroundEl> bgarr; // ArrayList of all the background elements
 ArrayList<ObstacleEl> obsarr; 
 PVector jumpForce = new PVector(0, -100); // Used to establish jump strength
@@ -36,10 +27,6 @@ void setup() {
   textFont(font);
   textAlign(CENTER);
   text("PRESS UP ARROW TO START", width/2, height/2);
-  player = new PlayerEl();
-  bg = new BackgroundEl();
-  imageMode(CORNER);
-  startFrame = true;
   
   // Create objects
   player = new PlayerEl();
@@ -77,30 +64,6 @@ void draw() {
        temp.display();
        temp.move();
        
-  
-  line(0, height/1.25, width, height/1.25); // Draw Line
-  
-  if(frameCount % 100 == 0) {
-    bgarr.add(new BackgroundEl());
-  }
-  
-  TreeEl treeEx = new TreeEl();
-  //if (frameCount % 50 == 0) {
-   treeEx.display(); 
-  //}
-  
-  for(int x = 0; x < bgarr.size(); x++){
-     BackgroundEl temp = bgarr.get(x);
-     temp.display();
-     temp.move();
-     if(temp.xposCl < -1000) {
-       bgarr.remove(x);
-       x--;
-     }
-  }
-  
-  player.gravity();
-  player.display();
        // If background is out of frame --> remove background from array
        if(temp.xposCl < -(250 * speed)) {
          bgarr.remove(x);
@@ -109,9 +72,10 @@ void draw() {
     }
     
     // Grounds the player
-    if(player.pos.y == height / 1.25 - player.radius)
+    if(player.pos.y == height / 1.25 - player.radius) {
       isGround = true;
-    
+      gravity = new PVector(0, 0.5);
+    }
     player.gravity(); // Apply gravity
     player.display(); // Display Player
     
@@ -200,6 +164,7 @@ void keyPressed() {
       System.out.println("Going up!");
     }
     else if (keyCode == DOWN) {
+      gravity.add(0,1);
       System.out.println("Landing/Ducking!");
     }
   }
