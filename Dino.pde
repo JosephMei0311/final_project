@@ -65,7 +65,7 @@ void draw() {
        temp.move();
        
        // If background is out of frame --> remove background from array
-       if(temp.xposCl < -(250 * speed)) {
+       if(temp.dotList.get(0).x < -(250 * speed)) {
          bgarr.remove(x);
          x--;
        }
@@ -79,9 +79,9 @@ void draw() {
     player.gravity(); // Apply gravity
     player.display(); // Display Player
     
-    if(random(1) < 0.75 && frameCount % int((60 + 0.5 * speed)) == 0) {
-          ObstacleEl[] selectObs = new ObstacleEl[] {new CactusEl(), new LongCactusEl(), new TreeEl()};
-          obsarr.add(selectObs[int(random(3))]); 
+    if(random(1) < 0.75 && frameCount % int((60)) == 0) {
+          ObstacleEl[] selectObs = new ObstacleEl[] {new CactusEl(), new LongCactusEl(), new TreeEl(), new CloudEl()};
+          obsarr.add(selectObs[int(random(4))]); 
         }
         
     for(int i = obsarr.size() - 1; i >= 0; i--) {
@@ -89,12 +89,12 @@ void draw() {
         p.move();
         
         p.display();
+        
         if (p.hit(player))
             hit = true;
         
         //Remove the barriers that went out of frame
-        if(p.xpos < -p.w)
-          {
+        if(p.xpos < -p.w) {
             obsarr.remove(i);
           }
     }

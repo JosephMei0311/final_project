@@ -1,9 +1,8 @@
 public class TreeEl extends ObstacleEl {
-  PImage treePic;
   ArrayList<PImage> textures = new ArrayList<PImage>();
   
   public TreeEl() {
-    super(40, 90, loadImage("tree.png"));
+    super(60, 120, height / 1.25 - 120, loadImage("Images/tree.png"));
   }
   
   void swapTexture() {

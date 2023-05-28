@@ -4,10 +4,12 @@ public class ObstacleEl {
   float w;
   float h;
   float xpos = width;
+  float ypos;
   
-  public ObstacleEl(float wid, float hei, PImage pict) {
+  public ObstacleEl(float wid, float hei, float y, PImage pict) {
     w = wid;
     h = hei;
+    ypos = y;
     pic = pict;
   }
   
@@ -17,7 +19,7 @@ public class ObstacleEl {
   }
   
   boolean hit(PlayerEl p) {
-    return ((p.pos.x > xpos) && ((p.pos.x) < (xpos + w))) &&  (p.pos.y > (height / 1.25 - h - p.radius));
+    return ((p.pos.x > xpos) && ((p.pos.x) < (xpos + w))) &&  (p.pos.y < (ypos + h)) && ((p.pos.y + p.radius) > ypos);
   }
   
   void move() {
@@ -25,8 +27,7 @@ public class ObstacleEl {
   }
   
   void display() {
-    //rect(xpos, height / 1.25 - h, w, h);
     imageMode(CORNER);
-    image(pic, xpos, height / 1.25 - h, w, h);
+    image(pic, xpos, ypos, w, h);
   } 
 }
