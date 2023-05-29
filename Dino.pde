@@ -6,9 +6,6 @@ int highScore = 0;
 boolean hit = false; // Player runs into obstacle
 int textureType; // Selects the texture
 PlayerEl player;
-TreeEl tree;
-CactusEl cactus;
-LongCactusEl longCactus;
 ArrayList<BackgroundEl> bgarr; // ArrayList of all the background elements
 ArrayList<ObstacleEl> obsarr; 
 PVector jumpForce = new PVector(0, -100); // Used to establish jump strength

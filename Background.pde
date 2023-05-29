@@ -1,5 +1,4 @@
 public class BackgroundEl {
-  
   ArrayList<PVector> dotList = new ArrayList<PVector>();
   ArrayList<PImage> textures = new ArrayList<PImage>();
   
