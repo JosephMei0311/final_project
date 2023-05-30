@@ -8,9 +8,12 @@ int textureType; // Selects the texture
 PlayerEl player;
 ArrayList<BackgroundEl> bgarr; // ArrayList of all the background elements
 ArrayList<ObstacleEl> obsarr; 
+ArrayList<PowerUpsEl> powerUparr;
 PVector jumpForce = new PVector(0, -100); // Used to establish jump strength
 boolean startFrame; // Restarts frame count
 float speed;
+boolean invulnerable = false;
+boolean drunk = false;
 
 void setup() {
   // Initial setup
@@ -29,6 +32,7 @@ void setup() {
   player = new PlayerEl();
   bgarr = new ArrayList<BackgroundEl>();
   obsarr = new ArrayList<ObstacleEl>();
+  powerUparr = new ArrayList<PowerUpsEl>();
   
   startFrame = true;
   speed = 8;
