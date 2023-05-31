@@ -1,5 +1,5 @@
 class PlayerEl {
-  PImage dinoPic = loadImage("Images/mushDino.png");
+  PImage dinoPic = loadImage("Images/Kawaii/player.png");
   //ArrayList(PImage) textures;
   PVector pos;
   PVector acc; 
