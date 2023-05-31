@@ -76,7 +76,7 @@ void draw() {
     player.gravity(); // Apply gravity
     player.display(); // Display Player
     
-    if(random(1) < 0.75 && frameCount % int((60)) == 0) {
+    if(random(1) < 0.75 && frameCount % 60 == 0) {
           ObstacleEl[] selectObs = new ObstacleEl[] {new CactusEl(), new LongCactusEl(), new TreeEl(), new CloudEl()};
           obsarr.add(selectObs[int(random(4))]); 
         }
