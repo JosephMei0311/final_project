@@ -13,7 +13,7 @@ PVector jumpForce = new PVector(0, -100); // Used to establish jump strength
 boolean startFrame; // Restarts frame count
 float speed;
 boolean invulnerable = false;
-boolean drunk = false;
+boolean drunk = true;
 int attempts = 0;
 
 void setup() {
@@ -27,7 +27,7 @@ void setup() {
   fill(0, 0, 0);
   textFont(font);
   textAlign(CENTER);
-  text("PRESS UP ARROW TO START", width/2, height/2);
+  text("PRESS ENTER TO START", width/2, height/2);
   
   // Create objects
   player = new PlayerEl();
@@ -147,7 +147,7 @@ void reset() {
   textFont(font);
   textAlign(CENTER);
   text("lmao what a loser", width/2, height/2 - 75);
-  text("PRESS UP ARROW TO START", width/2, height/2);
+  text("PRESS ENTER TO START", width/2, height/2);
   text("Attempts: " + attempts, width/2, height/2 + 75);
   
   // Create objects
@@ -165,26 +165,27 @@ void reset() {
 
 void keyPressed() {
   if(key == CODED) {
-    if (keyCode == UP) {
-      start = true; // start game
-      
+    if (keyCode == UP) { 
       if(drunk) {
        fall();
        System.out.println("You're drunk! Going down!");
       }
-      else if(isGround) { // jumps
-        jump();
-        isGround = false;
+      else {
+        if(isGround) { // jumps
+          jump();
+          isGround = false;
+        }
       }
       
       System.out.println("Going up!");
     }
     else if (keyCode == DOWN) {
-      
       if (drunk) { // gives you unlimited up jumps oops
-        jump();
-        isGround = false;
-        System.out.println("You're drunk! Going up!");
+        if(isGround){
+          jump();
+          isGround = false;
+          System.out.println("You're drunk! Going up!");
+        }
       }
       else {
         fall();
@@ -196,5 +197,8 @@ void keyPressed() {
     if (key == 'r' || key == 'R') {
       reset();
       System.out.println("reset");
+    }
+    else if (key == ENTER) {
+      start = true;
     }
   }
