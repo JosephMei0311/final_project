@@ -13,7 +13,7 @@ PVector jumpForce = new PVector(0, -100); // Used to establish jump strength
 boolean startFrame; // Restarts frame count
 float speed;
 boolean invulnerable = false;
-boolean drunk = true;
+boolean drunk = false;
 int attempts = 0;
 
 void setup() {
@@ -85,6 +85,24 @@ void draw() {
           ObstacleEl[] selectObs = new ObstacleEl[] {new CactusEl(), new LongCactusEl(), new TreeEl(), new CloudEl()};
           obsarr.add(selectObs[int(random(4))]); 
         }
+        
+    if(random(1) < 0.75 && frameCount % 100 == 0) {
+      //powerUparr.add(new PowerUpsEl(int(random(4))); 
+      powerUparr.add(new PowerUpsEl(1));
+    }
+    
+    for(int i = powerUparr.size() - 1; i >= 0; i--) {
+    PowerUpsEl p = powerUparr.get(i);
+      p.move();
+      
+      p.display(1);
+
+    
+    //Remove the barriers that went out of frame
+    if(p.xpos < -p.w) {
+        powerUparr.remove(i);
+      }
+    }
         
     for(int i = obsarr.size() - 1; i >= 0; i--) {
         ObstacleEl p = obsarr.get(i);

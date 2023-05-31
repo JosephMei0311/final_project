@@ -9,16 +9,17 @@ class PowerUpsEl{
   float ypos;
   boolean invulnerable;
   boolean isDisplay = true;
-  float multiplier;
-  
+  float multiplier = 1;
+  float radius;
 //int num
-  public PowerUpsEl() {
-    w = 50;
-    h = 50;
+  public PowerUpsEl(int num) {
+
     ypos = width;
-     //if (num == 1) [
-       
-     //}
+     if (num == 1) {
+           w = 50;
+           h = 50;
+           display(num);
+     }
      //else if (num == 2) {
        
      //}
@@ -43,10 +44,12 @@ class PowerUpsEl{
     xpos -= speed;
   }
   
-  void display() {
+  void display(int num) {
     if (!hit && isDisplay == true) {
-    imageMode(CORNER);
-    image(pic1, xpos, ypos, w, h);
+      imageMode(CORNER);
+      if (num == 1) {
+        image(pic1, xpos, ypos, w, h);
+      }
     }
     else {
      clear(); 
@@ -59,7 +62,6 @@ class PowerUpsEl{
    }
    
    boolean invulnerable() {
-     invulnerable = true;
      int accum = 0;
      while(accum % 3 != 0) {
       if(hit) {
@@ -78,11 +80,15 @@ class PowerUpsEl{
   }
   
   void drunk() {
-    drunk = true;
+    if(hit) {
+      drunk = true;
+    }
   }
   
   void shrinkShroom() {
-    // set radius to smaller number for certain number of frames
+    if(hit) {
+      radius = 10;
+    }
   }
   
 }
