@@ -14,6 +14,7 @@ boolean startFrame; // Restarts frame count
 float speed;
 boolean invulnerable = false;
 boolean drunk = false;
+int attempts = 0;
 
 void setup() {
   // Initial setup
@@ -134,6 +135,7 @@ void reset() {
   size(1500,600);
   background(200,200, 200);
   imageMode(CORNER);
+  attempts++;
   
   // Change high score on reset
   if(score > highScore)
@@ -146,6 +148,7 @@ void reset() {
   textAlign(CENTER);
   text("lmao what a loser", width/2, height/2 - 75);
   text("PRESS UP ARROW TO START", width/2, height/2);
+  text("Attempts: " + attempts, width/2, height/2 + 75);
   
   // Create objects
   player = new PlayerEl();
@@ -165,7 +168,11 @@ void keyPressed() {
     if (keyCode == UP) {
       start = true; // start game
       
-      if(isGround) { // jumps
+      if(drunk) {
+       fall();
+       System.out.println("You're drunk! Going down!");
+      }
+      else if(isGround) { // jumps
         jump();
         isGround = false;
       }
@@ -173,8 +180,16 @@ void keyPressed() {
       System.out.println("Going up!");
     }
     else if (keyCode == DOWN) {
-      fall();
-      System.out.println("Landing/Ducking!");
+      
+      if (drunk) { // gives you unlimited up jumps oops
+        jump();
+        isGround = false;
+        System.out.println("You're drunk! Going up!");
+      }
+      else {
+        fall();
+        System.out.println("Landing/Ducking!");
+      }
     }
   }
   

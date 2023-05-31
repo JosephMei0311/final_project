@@ -1,18 +1,21 @@
 class PowerUpsEl{
-  PImage pic;
+  PImage pic1 = loadImage("Images/Kawaii/cloud.png");
+  PImage pic2;
+  PImage pic3;
   ArrayList<PImage> textures;
   float w;
   float h;
   float xpos = width;
   float ypos;
+  boolean invulnerable;
+  boolean isDisplay = true;
+  float multiplier;
   
-  public PowerUpsEl(float wid, float hei, float y, PImage pict) {
-    w = wid;
-    h = hei;
-    ypos = y;
-    pic = pict;
-     //Random rand = new Random();
-     //int num = rand.nextInt(4);
+//int num
+  public PowerUpsEl() {
+    w = 50;
+    h = 50;
+    ypos = width;
      //if (num == 1) [
        
      //}
@@ -25,13 +28,11 @@ class PowerUpsEl{
      //else if (num == 4) {
        
      //}
-     rect(120,height/1.25, 100,100);
-
+     //rect(120,height/1.25, 100,100);
   }
   
-  
   void swapTexture() {
-  
+  //might not implement
   }
   
   boolean hit(PlayerEl p) {
@@ -43,47 +44,41 @@ class PowerUpsEl{
   }
   
   void display() {
-    if (!hit) {
+    if (!hit && isDisplay == true) {
     imageMode(CORNER);
-    image(pic, xpos, ypos, w, h);
+    image(pic1, xpos, ypos, w, h);
     }
     else {
-      //clear
+     clear(); 
     }
   } 
-  
-  boolean invulnerable;
-  boolean display = true;
-  
 
-     
-     
+         
    void clear() {
-     
+     isDisplay = true;
    }
    
-   void invulnerable() {
-     
-     
-     
-     //random value to determine powerUp
-     /*
-      if (ObstacleEl.hit()) 
-      count++;
-        if (count % 3 == 0) {
-          invulnerable = false;
-        }
-     */
+   boolean invulnerable() {
+     invulnerable = true;
+     int accum = 0;
+     while(accum % 3 != 0) {
+      if(hit) {
+       accum++; 
+      }
+     }
+     invulnerable = false;
+     return invulnerable;
    }
   
   void scoreMult() {
     if (hit) {
-     //Dino.score = score * 1.1; 
+     multiplier = random(3);
+     
     }
   }
   
   void drunk() {
-    //drunk = true;
+    drunk = true;
   }
   
   void shrinkShroom() {
