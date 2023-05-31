@@ -13,8 +13,9 @@ PVector jumpForce = new PVector(0, -100); // Used to establish jump strength
 boolean startFrame; // Restarts frame count
 float speed;
 boolean invulnerable = false;
-boolean drunk = true;
+boolean drunk = false;
 int attempts = 0;
+int secondsCount = 0;
 
 void setup() {
   // Initial setup
@@ -52,6 +53,7 @@ void draw() {
     fill(100, 50, 0);
     rect(0, height/1.25, width, height);
     displayStats(); // Display score and high score
+    countDown();
     
     stroke(0, 200, 0);
     line(0, height/1.25, width, height/1.25); // Draw Line
@@ -117,6 +119,16 @@ void fall() {
   gravity.add(0,1);
 }
 
+void countDown() {
+  if(secondsCount >= 0) {
+    if(frameCount % 60 == 0) {
+      secondsCount--;
+    }
+    textAlign(LEFT);
+    text(secondsCount, 10, 30);
+  }
+}
+
 void displayStats() { 
   score = frameCount / 10; // Score is framecount divided by 10
   
@@ -161,6 +173,7 @@ void reset() {
   score = 0;
   hit = false;
   speed = 8;
+  secondsCount = 0;
 }
 
 void keyPressed() {
