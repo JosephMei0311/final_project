@@ -1,8 +1,8 @@
 PVector gravity = new PVector(0, .5);
 boolean isGround = true; // Player Only Jumps when on Ground
 boolean start = false; // Starts Game when true
-int score = 0;
-int highScore = 0;
+int score;
+int highScore;
 boolean hit = false; // Player runs into obstacle
 int textureType; // Selects the texture
 PlayerEl player;
@@ -12,10 +12,11 @@ ArrayList<PowerUpsEl> powerUparr;
 PVector jumpForce = new PVector(0, -100); // Used to establish jump strength
 boolean startFrame; // Restarts frame count
 float speed;
-boolean invulnerable = false;
-boolean drunk = false;
-int attempts = 0;
-int secondsCount = 0;
+int attempts;
+int secondsCount;
+boolean invulnerable;
+boolean drunk;
+String effect;
 
 void setup() {
   // Initial setup
@@ -36,8 +37,15 @@ void setup() {
   obsarr = new ArrayList<ObstacleEl>();
   powerUparr = new ArrayList<PowerUpsEl>();
   
+  score = 0;
+  highScore = 0;
   startFrame = true;
   speed = 8;
+  attempts = 0;
+  secondsCount = 0;
+  invulnerable = false;
+  drunk = false;
+  effect = "";
 }
 
 void draw() {
@@ -53,7 +61,7 @@ void draw() {
     fill(100, 50, 0);
     rect(0, height/1.25, width, height);
     displayStats(); // Display score and high score
-    countDown();
+    countDownAndDisplay();
     
     stroke(0, 200, 0);
     line(0, height/1.25, width, height/1.25); // Draw Line
@@ -88,40 +96,50 @@ void draw() {
           obsarr.add(selectObs[int(random(4))]); 
         }
         
-    if(random(1) < 0.75 && frameCount % 100 == 0) {
-      //powerUparr.add(new PowerUpsEl(int(random(4))); 
-      powerUparr.add(new PowerUpsEl(1));
-    }
-    
-    for(int i = powerUparr.size() - 1; i >= 0; i--) {
-    PowerUpsEl p = powerUparr.get(i);
-      p.move();
-      
-      p.display(1);
-
-    
-    //Remove the barriers that went out of frame
-    if(p.xpos < -p.w) {
-        powerUparr.remove(i);
-      }
-    }
-        
     for(int i = obsarr.size() - 1; i >= 0; i--) {
-        ObstacleEl p = obsarr.get(i);
-        p.move();
+        ObstacleEl obs = obsarr.get(i);
+        obs.move();
         
-        p.display();
+        obs.display();
         
-        if (p.hit(player))
+        if (obs.hit(player))
             hit = true;
         
         //Remove the barriers that went out of frame
-        if(p.xpos < -p.w) {
+        if(obs.xpos < -obs.w) {
             obsarr.remove(i);
           }
     }
+        
+    if(random(1) < 0.75 && frameCount % 100 == 0) {
+      //powerUparr.add(new PowerUpsEl(int(random(4))); 
+      powerUparr.add(new PowerUpsEl());
+    }
     
-    if(score % 50 == 0)
+    for(int i = powerUparr.size() - 1; i >= 0; i--) {
+      PowerUpsEl power = powerUparr.get(i);
+      
+       if(power.hit(player)){
+         int randNum = int(random(2));
+         //power.isDisplay = false;
+         secondsCount = 5;
+         power.specialEffects(randNum);
+         powerUparr.remove(i);
+       }
+       else{
+         power.display();
+         power.move();
+       }
+    //Remove the barriers that went out of frame
+    if(power.xpos < -power.w) {
+        powerUparr.remove(i);
+      }
+    }
+   if((drunk == true || invulnerable == true) && secondsCount == 0){
+     drunk = false;
+     invulnerable = false;
+   }
+   if(score % 50 == 0)
       speed += 0.1;
     
    if(hit)
@@ -137,13 +155,14 @@ void fall() {
   gravity.add(0,1);
 }
 
-void countDown() {
+void countDownAndDisplay() {
   if(secondsCount >= 0) {
     if(frameCount % 60 == 0) {
       secondsCount--;
     }
     textAlign(LEFT);
     text(secondsCount, 10, 30);
+    text(effect, 10, 60);
   }
 }
 
@@ -184,6 +203,7 @@ void reset() {
   player = new PlayerEl();
   bgarr = new ArrayList<BackgroundEl>();
   obsarr = new ArrayList<ObstacleEl>();
+  powerUparr = new ArrayList<PowerUpsEl>();
   
   // Reset startFrame, start, and score
   startFrame = true;
@@ -192,6 +212,10 @@ void reset() {
   hit = false;
   speed = 8;
   secondsCount = 0;
+  effect = "";
+  invulnerable = false;
+  drunk = false;
+  
 }
 
 void keyPressed() {
