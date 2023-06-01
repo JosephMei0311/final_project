@@ -1,22 +1,34 @@
-PVector gravity = new PVector(0, .5);
-boolean isGround = true; // Player Only Jumps when on Ground
-boolean start = false; // Starts Game when true
-int score;
-int highScore;
-boolean hit = false; // Player runs into obstacle
-int textureType; // Selects the texture
+// Kinematics
+PVector gravity;
+PVector jumpForce; // Used to establish jump strength
+boolean isGround; // Player Only Jumps when on Ground
+float speed;
+
+// Game Configs
+boolean start; // Starts Game when true
+boolean hit; // Player runs into obstacle
+boolean startFrame; // Restarts frame count
+
+// Objects
 PlayerEl player;
 ArrayList<BackgroundEl> bgarr; // ArrayList of all the background elements
 ArrayList<ObstacleEl> obsarr; 
 ArrayList<PowerUpsEl> powerUparr;
-PVector jumpForce = new PVector(0, -100); // Used to establish jump strength
-boolean startFrame; // Restarts frame count
-float speed;
+
+// Stats
 int attempts;
-int secondsCount;
+int score;
+int highScore;
+
+// Powerups
 boolean invulnerable;
 boolean drunk;
+boolean jumpHigh;
 String effect;
+int secondsCount;
+
+// Texture
+int textureType; // Selects the texture
 
 void setup() {
   // Initial setup
@@ -31,21 +43,34 @@ void setup() {
   textAlign(CENTER);
   text("PRESS ENTER TO START", width/2, height/2);
   
+  // Kinematics
+  gravity = new PVector(0, .5);
+  jumpForce = new PVector(0, -100);
+  isGround = true;
+  speed = 8;
+  
+  // Game Configs
+  start = false;
+  hit = false;
+  startFrame = true;
+  
   // Create objects
   player = new PlayerEl();
   bgarr = new ArrayList<BackgroundEl>();
   obsarr = new ArrayList<ObstacleEl>();
   powerUparr = new ArrayList<PowerUpsEl>();
   
+  // Stats
   score = 0;
   highScore = 0;
-  startFrame = true;
-  speed = 8;
   attempts = 0;
-  secondsCount = 0;
+  
+  // Powerups
   invulnerable = false;
   drunk = false;
+  jumpHigh = false;
   effect = "";
+  secondsCount = 0;
 }
 
 void draw() {
@@ -89,6 +114,7 @@ void draw() {
       gravity = new PVector(0, 0.5);
     }
     player.gravity(); // Apply gravity
+    noTint();
     player.display(); // Display Player
     
     if(random(1) < 0.75 && frameCount % 60 == 0) {
@@ -100,6 +126,7 @@ void draw() {
         ObstacleEl obs = obsarr.get(i);
         obs.move();
         
+        noTint();
         obs.display();
         
         if (obs.hit(player))
@@ -111,8 +138,7 @@ void draw() {
           }
     }
         
-    if(random(1) < 0.75 && frameCount % 100 == 0) {
-      //powerUparr.add(new PowerUpsEl(int(random(4))); 
+    if(random(1) < 0.25 && frameCount % 200 == 0) {
       powerUparr.add(new PowerUpsEl());
     }
     
@@ -120,8 +146,7 @@ void draw() {
       PowerUpsEl power = powerUparr.get(i);
       
        if(power.hit(player)){
-         int randNum = int(random(2));
-         //power.isDisplay = false;
+         int randNum = int(random(3));
          secondsCount = 5;
          power.specialEffects(randNum);
          powerUparr.remove(i);
@@ -135,19 +160,35 @@ void draw() {
         powerUparr.remove(i);
       }
     }
-   if((drunk == true || invulnerable == true) && secondsCount == 0){
+    
+   if((drunk == true || invulnerable == true  || jumpHigh == true) && secondsCount == 0){
      drunk = false;
      invulnerable = false;
+     jumpHigh = false;
    }
+   
    if(score % 50 == 0)
       speed += 0.1;
+      
+   if(drunk){
+     noStroke();
+     fill(0, 255, 0, 50);
+     rect(0, 0, width, height);
+   }
     
-   if(hit)
-     reset();      
+   if(hit && !invulnerable)
+     reset();
+   else
+     hit = false;
   }
 }
 
 void jump() {
+  if(jumpHigh)
+    player.jumpHeight = 15;
+  else
+    player.jumpHeight = 10;
+    
   player.addForce(jumpForce);
 }
 
@@ -156,7 +197,7 @@ void fall() {
 }
 
 void countDownAndDisplay() {
-  if(secondsCount >= 0) {
+  if(secondsCount > 0) {
     if(frameCount % 60 == 0) {
       secondsCount--;
     }
@@ -181,14 +222,9 @@ void displayStats() {
 
 void reset() {
   // Reset start screen
-  size(1500,600);
-  background(200,200, 200);
+  size(1500, 600);
+  background(200, 200, 200);
   imageMode(CORNER);
-  attempts++;
-  
-  // Change high score on reset
-  if(score > highScore)
-    highScore = score;
   
   // Start screen text
   PFont font = createFont("Papyrus", 50);
@@ -199,23 +235,39 @@ void reset() {
   text("PRESS ENTER TO START", width/2, height/2);
   text("Attempts: " + attempts, width/2, height/2 + 75);
   
-  // Create objects
+  // Change high score on reset
+  if(score > highScore)
+    highScore = score;
+    
+  // Increment attempts
+  attempts++;
+  
+  // Re-create objects
   player = new PlayerEl();
   bgarr = new ArrayList<BackgroundEl>();
   obsarr = new ArrayList<ObstacleEl>();
   powerUparr = new ArrayList<PowerUpsEl>();
   
-  // Reset startFrame, start, and score
+  // Kinematics
+  gravity = new PVector(0, .5);
+  isGround = true;
+  speed = 8;
+  jumpForce = new PVector(0, -100);
+  
+  // Game Configs
   startFrame = true;
   start = false;
-  score = 0;
   hit = false;
-  speed = 8;
-  secondsCount = 0;
-  effect = "";
+  
+  // Stats
+  score = 0;
+  
+  // Powerups
   invulnerable = false;
   drunk = false;
-  
+  jumpHigh = false;
+  secondsCount = 0;
+  effect = "";
 }
 
 void keyPressed() {
@@ -231,7 +283,6 @@ void keyPressed() {
           isGround = false;
         }
       }
-      
       System.out.println("Going up!");
     }
     else if (keyCode == DOWN) {
@@ -248,7 +299,6 @@ void keyPressed() {
       }
     }
   }
-  
     if (key == 'r' || key == 'R') {
       reset();
       System.out.println("reset");

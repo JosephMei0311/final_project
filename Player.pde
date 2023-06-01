@@ -27,7 +27,7 @@ class PlayerEl {
     }
    
     vel.add(acc);
-    vel.limit(10);
+    vel.limit(jumpHeight);
    
     acc.mult(0);
   }
@@ -36,6 +36,12 @@ class PlayerEl {
   void display() {
     imageMode(CORNER);
     image(dinoPic, pos.x, pos.y, radius, radius);
+    
+    if(invulnerable) {
+      noStroke();
+      fill(160, 32, 240, 50);
+      ellipse(pos.x + radius / 2, pos.y + radius / 2, radius + 25, radius + 25);
+    }
   }
   
   void swapTexture() {

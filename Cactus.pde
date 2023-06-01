@@ -4,5 +4,4 @@ public class CactusEl extends ObstacleEl{
   public CactusEl() {
     super(80, 80, height / 1.25 - 80, loadImage("Images/Kawaii/cactus.png"));
   }
-  
 }

@@ -1,20 +1,15 @@
 class PowerUpsEl {
-  PImage pic1 = loadImage("Images/Kawaii/cloud.png");
-  PImage pic2;
-  PImage pic3;
-  ArrayList<PImage> textures;
+  PImage pic;
+  PImage blockPic = loadImage("Images/Powerups/lucky.png");
   
-  float w = 40;
-  float h = 40;
+  float w = 80;
+  float h = 80;
   float xpos = width;
-  float ypos = 200;
+  float ypos = 220;
+  int change = 0;
 
-  boolean invulnerable;
   float multiplier = 1;
   float radius;
-  
-  //boolean isDisplay = true;
-  boolean pHit = false;
 
   boolean hit(PlayerEl p) {
     return ((p.pos.x > xpos) && ((p.pos.x) < (xpos + w))) &&  (p.pos.y < (ypos + h)) && ((p.pos.y + p.radius) > ypos);
@@ -22,37 +17,38 @@ class PowerUpsEl {
 
   void move() {
     xpos -= speed;
+    change += 2;
   }
 
   void display() {
-    //if (isDisplay == true) {
-      imageMode(CORNER);
-      rect(xpos, ypos, w, h);
-      //if (num == 1) {
-      //image(pic1, xpos, ypos, w, h);
-    //}
+    imageMode(CORNER);
+      if(change == 100){
+        tint(255, 0, 0);
+        change = 1;
+      }
+      else if(change == 101){
+        noTint();
+        change = 0;
+      }
+    image(blockPic, xpos, ypos, w, h);
   }
   
   void specialEffects(int num) {
    if(num == 0) {
      drunk = true;
      effect = "drunk";
+     pic = loadImage("Images/Powerups/shield.png");
    }
    else if(num == 1) {
      invulnerable = true;
      effect = "invulnerable";
+     pic = loadImage("Images/Powerups/shield.png");
    }
+   else if(num == 2) {
+     jumpHigh = true;
+     effect = "High Jump";
+     pic = loadImage("Images/Powerups/shield.png");
   }
-  
-  boolean invulnerable() {
-    int accum = 0;
-    while (accum % 3 != 0) {
-      if (hit) {
-        accum++;
-      }
-    }
-    invulnerable = false;
-    return invulnerable;
   }
 
   void scoreMult() {
