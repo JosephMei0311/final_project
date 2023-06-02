@@ -31,6 +31,7 @@ int secondsCount;
 
 // Texture
 int textureType; // Selects the texture
+int textNum = 2; // # of texture packs
 
 void setup() {
   // Initial setup
@@ -48,6 +49,11 @@ void setup() {
   textSize(25);
   text("Kawaii", width/3, height/2 + 150);
   text("Pokemon", width * 2 / 3, height/2 + 150);
+  
+  strokeWeight(5);
+  rectMode(CENTER);
+  fill(0, 255, 255, 50);
+  rect(width * (textureType + 1) / 3, height/2 + 150, 150, 50);
   
   // Kinematics
   gravity = new PVector(0, .5);
@@ -264,6 +270,11 @@ void reset() {
   text("Kawaii", width/3, height/2 + 150);
   text("Pokemon", width * 2 / 3, height/2 + 150);
   
+  strokeWeight(5);
+  rectMode(CENTER);
+  fill(0, 255, 255, 50);
+  rect(width * (textureType + 1) / 3, height/2 + 150, 150, 50);
+  
   // Change high score on reset
   if(score > highScore)
     highScore = score;
@@ -331,20 +342,20 @@ void keyPressed() {
     }
     else if(keyCode == RIGHT) {
       if(!start) {
-        if(textureType != 1)
+        if(textureType < textNum - 1)
           textureType++;
         else
           textureType = 0;
         if(startScreen)
           setup();
         else {
-          reset();
           attempts--;
+          reset();
         }
       strokeWeight(5);
       rectMode(CENTER);
       fill(0, 255, 255, 50);
-      rect(width * (textureType + 1) / 3, height/2 + 150, 150, 50);
+      rect(width * (textureType + 1) / (textNum + 1), height / 2 + 150, 150, 50);
       System.out.println("change");
       }
     }
@@ -354,18 +365,18 @@ void keyPressed() {
         if(textureType != 0)
           textureType--;
         else
-          textureType = 1;
+          textureType = textNum - 1;
           
         if(startScreen)
           setup();
         else {
-          reset();
           attempts--;
+          reset();
         }
         strokeWeight(5);
         rectMode(CENTER);
         fill(0, 255, 255, 50);
-        rect(width * (textureType + 1) / 3, height/2 + 150, 150, 50);
+        rect(width * (textureType + 1) / (textNum + 1), height/2 + 150, 150, 50);
         System.out.println("change");
       }
     }
