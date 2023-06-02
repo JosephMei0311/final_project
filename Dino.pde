@@ -8,6 +8,7 @@ float speed;
 boolean start; // Starts Game when true
 boolean hit; // Player runs into obstacle
 boolean startFrame; // Restarts frame count
+boolean controlSrc; // Directs you to the control screen
 
 // Objects
 PlayerEl player;
@@ -53,6 +54,7 @@ void setup() {
   start = false;
   hit = false;
   startFrame = true;
+  controlSrc = false;
   
   // Create objects
   player = new PlayerEl();
@@ -181,6 +183,14 @@ void draw() {
    else
      hit = false;
   }
+  
+  if (controlSrc == true) {
+    background(0,2,5);
+    textSize(128);
+    text("Controls", width/2, 100); 
+    
+  }
+  
 }
 
 void jump() {
@@ -258,6 +268,7 @@ void reset() {
   startFrame = true;
   start = false;
   hit = false;
+  controlSrc = false;
   
   // Stats
   score = 0;
@@ -305,5 +316,10 @@ void keyPressed() {
     }
     else if (key == ENTER) {
       start = true;
+      controlSrc = false;
+    }
+    else if (key == ' ') {
+      start = false;
+      controlSrc = true;
     }
   }
