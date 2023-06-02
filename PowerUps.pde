@@ -17,19 +17,10 @@ class PowerUpsEl {
 
   void move() {
     xpos -= speed;
-    change += 2;
   }
 
   void display() {
     imageMode(CORNER);
-      if(change == 100){
-        tint(255, 0, 0);
-        change = 1;
-      }
-      else if(change == 101){
-        noTint();
-        change = 0;
-      }
     image(blockPic, xpos, ypos, w, h);
   }
   

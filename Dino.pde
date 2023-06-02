@@ -9,6 +9,7 @@ boolean start; // Starts Game when true
 boolean hit; // Player runs into obstacle
 boolean startFrame; // Restarts frame count
 boolean controlSrc; // Directs you to the control screen
+boolean startScreen;
 
 // Objects
 PlayerEl player;
@@ -41,8 +42,12 @@ void setup() {
   PFont font = createFont("Papyrus", 50);
   fill(0, 0, 0);
   textFont(font);
-  textAlign(CENTER);
-  text("PRESS ENTER TO START", width/2, height/2);
+  textAlign(CENTER, CENTER);
+  text("PRESS ENTER TO START", width/2, height/2 - 50);
+  
+  textSize(25);
+  text("Kawaii", width/3, height/2 + 150);
+  text("Pokemon", width * 2 / 3, height/2 + 150);
   
   // Kinematics
   gravity = new PVector(0, .5);
@@ -55,6 +60,7 @@ void setup() {
   hit = false;
   startFrame = true;
   controlSrc = false;
+  startScreen = true;
   
   // Create objects
   player = new PlayerEl();
@@ -65,7 +71,7 @@ void setup() {
   // Stats
   score = 0;
   highScore = 0;
-  attempts = 0;
+  attempts = 1;
   
   // Powerups
   invulnerable = false;
@@ -73,6 +79,7 @@ void setup() {
   jumpHigh = false;
   effect = "";
   secondsCount = 0;
+  
 }
 
 void draw() {
@@ -86,6 +93,7 @@ void draw() {
     
     background(30,170, 240); // Change background color
     fill(100, 50, 0);
+    rectMode(CORNER);
     rect(0, height/1.25, width, height);
     displayStats(); // Display score and high score
     countDownAndDisplay();
@@ -120,8 +128,15 @@ void draw() {
     player.display(); // Display Player
     
     if(random(1) < 0.75 && frameCount % 60 == 0) {
-          ObstacleEl[] selectObs = new ObstacleEl[] {new CactusEl(), new LongCactusEl(), new TreeEl(), new CloudEl()};
-          obsarr.add(selectObs[int(random(4))]); 
+      int num = int(random(4));
+      if(num == 0)
+        obsarr.add(new CactusEl());
+      else if(num == 1)
+        obsarr.add(new LongCactusEl());
+      else if(num == 2)
+        obsarr.add(new TreeEl());
+      else if(num == 3)
+        obsarr.add(new CloudEl());
         }
         
     for(int i = obsarr.size() - 1; i >= 0; i--) {
@@ -240,10 +255,14 @@ void reset() {
   PFont font = createFont("Papyrus", 50);
   fill(0, 0, 0);
   textFont(font);
-  textAlign(CENTER);
-  text("lmao what a loser", width/2, height/2 - 75);
-  text("PRESS ENTER TO START", width/2, height/2);
-  text("Attempts: " + attempts, width/2, height/2 + 75);
+  textAlign(CENTER, CENTER);
+  text("lmao what a loser", width/2, height/2 - 125);
+  text("PRESS ENTER TO START", width/2, height/2 - 50);
+  text("Attempts: " + attempts, width/2, height/2 + 25);
+
+  textSize(25);
+  text("Kawaii", width/3, height/2 + 150);
+  text("Pokemon", width * 2 / 3, height/2 + 150);
   
   // Change high score on reset
   if(score > highScore)
@@ -269,6 +288,7 @@ void reset() {
   start = false;
   hit = false;
   controlSrc = false;
+  startScreen = false;
   
   // Stats
   score = 0;
@@ -310,11 +330,44 @@ void keyPressed() {
       }
     }
     else if(keyCode == RIGHT) {
-      textureType++;
+      if(!start) {
+        if(textureType != 1)
+          textureType++;
+        else
+          textureType = 0;
+        if(startScreen)
+          setup();
+        else {
+          reset();
+          attempts--;
+        }
+      strokeWeight(5);
+      rectMode(CENTER);
+      fill(0, 255, 255, 50);
+      rect(width * (textureType + 1) / 3, height/2 + 150, 150, 50);
       System.out.println("change");
+      }
     }
+    
     else if(keyCode == LEFT) {
-      textureType--;
+      if(!start) {
+        if(textureType != 0)
+          textureType--;
+        else
+          textureType = 1;
+          
+        if(startScreen)
+          setup();
+        else {
+          reset();
+          attempts--;
+        }
+        strokeWeight(5);
+        rectMode(CENTER);
+        fill(0, 255, 255, 50);
+        rect(width * (textureType + 1) / 3, height/2 + 150, 150, 50);
+        System.out.println("change");
+      }
     }
   }
     if (key == 'r' || key == 'R') {

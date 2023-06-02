@@ -1,6 +1,5 @@
 public class BackgroundEl {
   ArrayList<PVector> dotList = new ArrayList<PVector>();
-  ArrayList<PImage> textures = new ArrayList<PImage>();
   
   public BackgroundEl() {
     for(int x = 0; x < 10; x++) {
