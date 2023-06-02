@@ -8,9 +8,6 @@ public class BackgroundEl {
     }
   }
 
-  void swapTexture() {
-  }
-
   void move() {
     // Move dots
     for(int x = 0; x < dotList.size(); x++) {

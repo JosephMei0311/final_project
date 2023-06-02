@@ -298,6 +298,13 @@ void keyPressed() {
         System.out.println("Landing/Ducking!");
       }
     }
+    else if(keyCode == RIGHT) {
+      textureType++;
+      System.out.println("change");
+    }
+    else if(keyCode == LEFT) {
+      textureType--;
+    }
   }
     if (key == 'r' || key == 'R') {
       reset();

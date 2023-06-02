@@ -1,16 +1,16 @@
 public class ObstacleEl {
   PImage pic;
-  ArrayList<PImage> textures;
+  PImage[] textures;
   float w;
   float h;
   float xpos = width;
   float ypos;
   
-  public ObstacleEl(float wid, float hei, float y, PImage pict) {
+  public ObstacleEl(float wid, float hei, float y, PImage[] textArray) {
     w = wid;
     h = hei;
     ypos = y;
-    pic = pict;
+    textures = textArray;
   }
   
   
@@ -28,6 +28,6 @@ public class ObstacleEl {
   
   void display() {
     imageMode(CORNER);
-    image(pic, xpos, ypos, w, h);
+    image(textures[textureType], xpos, ypos, w, h);
   } 
 }
