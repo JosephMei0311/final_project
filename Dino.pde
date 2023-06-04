@@ -34,7 +34,7 @@ int secondsCount;
 
 // Texture
 int textureType; // Selects the texture
-int textNum = 2; // # of texture packs
+int textNum = 3; // # of texture packs
 
 void setup() {
   // Initial setup
@@ -50,13 +50,14 @@ void setup() {
   text("PRESS ENTER TO START", width/2, height/2 - 50);
   
   textSize(25);
-  text("Kawaii", width/3, height/2 + 150);
-  text("Pokemon", width * 2 / 3, height/2 + 150);
+  text("Kawaii", width/ (textNum + 1), height/2 + 150);
+  text("Pokemon", width * 2 / (textNum + 1), height/2 + 150);
+  text("Minecraft", width * 3 / (textNum + 1), height/2 + 150);
   
   strokeWeight(5);
   rectMode(CENTER);
   fill(0, 255, 255, 50);
-  rect(width * (textureType + 1) / 3, height/2 + 150, 150, 50);
+  rect(width * (textureType + 1) / (textNum + 1), height/2 + 150, 150, 50);
   
   // Kinematics
   gravity = new PVector(0, .5);
@@ -137,7 +138,7 @@ void draw() {
       gravity = new PVector(0, 0.5);
     }
     player.gravity(); // Apply gravity
-    noTint();
+    
     player.display(); // Display Player
     
     if(random(1) < 0.75 && frameCount % 60 == 0) {
@@ -150,13 +151,12 @@ void draw() {
         obsarr.add(new TreeEl());
       else if(num == 3)
         obsarr.add(new CloudEl());
-        }
+    }
         
     for(int i = obsarr.size() - 1; i >= 0; i--) {
         ObstacleEl obs = obsarr.get(i);
         obs.move();
         
-        noTint();
         obs.display();
         
         if (obs.hit(player))
@@ -206,37 +206,16 @@ void draw() {
      rect(0, 0, width, height);
    }
     
-   if(hit && !invulnerable)
-     reset();
+   if(hit && !invulnerable){
+     attempts++;
+     reset(); // Increment attempts
+   }
    else
      hit = false;
   }
   
-  if (controlSrc == true) { //displays controls
-    background(255,255,255);
-    fill(0,0,0);
-    CactusEl c = new CactusEl();
-    CloudEl C = new CloudEl();
-    LongCactusEl l = new LongCactusEl();
-    TreeEl t = new TreeEl();
-    textSize(100);
-    text("Controls", width/2, 50); 
-    image(controls, width/8 - 50, height/8 ,350,300);
-    textSize(30);
-    text("Use the up and down keys for movement!", width * 3/16 + 50, height/3 + 120);
-    text("Avoid oncoming obstacles:", width * 3/16 + 50, height/3 + 170);
-    player.display(width/8 + 80, 50);
-    c.display(100, 3 * height/4);
-    C.display(200, 3 * height/4);
-    l.display(300, 3 * height/4);
-    t.display(450, 3 * height/4 - 20);
-    image(enter, width * 2/3 -50, height/8 + 90 ,150,150);
-    image(r, width * 2/3 + 150, height/8 + 90 ,150,150);
-    text("Use enter to resume the game and R to reset!", width * 12/16, height/3 + 120); 
-    text("Hitting a mystery box will grant you a random powerup:", width * 12/16, height/3 + 170);
-    text("drunk, invulnerability, highJump", width * 12/16, height/3 + 220);
-  }
-  
+  if (controlSrc == true) 
+    controlScreen();
 }
 
 void jump() {
@@ -250,6 +229,32 @@ void jump() {
 
 void fall() {
   gravity.add(0,1);
+}
+
+void controlScreen() { //displays controls
+    background(255,255,255);
+    fill(0,0,0);
+    CactusEl c = new CactusEl();
+    CloudEl C = new CloudEl();
+    LongCactusEl l = new LongCactusEl();
+    TreeEl t = new TreeEl();
+    textSize(100);
+    textAlign(CENTER, CENTER);
+    text("Controls", width/2, 50); 
+    image(controls, width/8 - 50, height/8 ,350,300);
+    textSize(30);
+    text("Use the up and down keys for movement!", width * 3/16 + 50, height/3 + 120);
+    text("Avoid oncoming obstacles:", width * 3/16 + 50, height/3 + 170);
+    player.display(width/8 + 80, 50);
+    c.display(100, 3 * height/4);
+    C.display(200, 3 * height/4);
+    l.display(300, 3 * height/4);
+    t.display(450, 3 * height/4 - 20);
+    image(enter, width * 2/3 - 50, height/8 + 90 ,150,150);
+    image(r, width * 2/3 + 150, height/8 + 90 ,150,150);
+    text("Use enter to resume the game and R to reset!", width * 12/16, height/3 + 120); 
+    text("Hitting a mystery box will grant you a random powerup:", width * 12/16, height/3 + 170);
+    text("drunk, invulnerability, highJump", width * 12/16, height/3 + 220);
 }
 
 void countDownAndDisplay() {
@@ -292,20 +297,18 @@ void reset() {
   text("Attempts: " + attempts, width/2, height/2 + 25);
 
   textSize(25);
-  text("Kawaii", width/3, height/2 + 150);
-  text("Pokemon", width * 2 / 3, height/2 + 150);
+  text("Kawaii", width/ (textNum + 1), height/2 + 150);
+  text("Pokemon", width * 2 / (textNum + 1), height/2 + 150);
+  text("Minecraft", width * 3 / (textNum + 1), height/2 + 150);
   
   strokeWeight(5);
   rectMode(CENTER);
   fill(0, 255, 255, 50);
-  rect(width * (textureType + 1) / 3, height/2 + 150, 150, 50);
+  rect(width * (textureType + 1) / (textNum + 1), height/2 + 150, 150, 50);
   
   // Change high score on reset
   if(score > highScore)
     highScore = score;
-    
-  // Increment attempts
-  attempts++;
   
   // Re-create objects
   player = new PlayerEl();
@@ -325,6 +328,8 @@ void reset() {
   hit = false;
   controlSrc = false;
   startScreen = false;
+  
+  
   
   // Stats
   score = 0;
@@ -374,7 +379,6 @@ void keyPressed() {
         if(startScreen)
           setup();
         else {
-          attempts--;
           reset();
         }
       strokeWeight(5);
@@ -395,7 +399,6 @@ void keyPressed() {
         if(startScreen)
           setup();
         else {
-          attempts--;
           reset();
         }
         strokeWeight(5);

@@ -1,5 +1,5 @@
 class PlayerEl {
-  String[] textures = {"Images/Kawaii/player.png", "Images/Pokemon/player.png"};
+  String[] textures = {"Images/Kawaii/player.png", "Images/Pokemon/player.png", "Images/Minecraft/player.png"};
   PImage dinoPic = loadImage(textures[textureType]);
   PVector pos;
   PVector acc; 
