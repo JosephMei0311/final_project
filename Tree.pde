@@ -4,4 +4,7 @@ public class TreeEl extends ObstacleEl {
     super(60, 120, height / 1.25 - 120, new String[]{"Images/Kawaii/tree.png", "Images/Pokemon/tree.png"});
   }
  
+  void display(int x, int y) {
+    super.display(x,y);
+  }
 }

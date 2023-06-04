@@ -44,6 +44,11 @@ class PlayerEl {
     }
   }
   
+  void display(int x, int y) { // for controls screen
+    imageMode(CORNER);
+    image(dinoPic, x, y, radius, radius);
+  }
+  
   void swapTexture() {
   }
 }

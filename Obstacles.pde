@@ -29,4 +29,8 @@ public class ObstacleEl {
     imageMode(CORNER);
     image(pic, xpos, ypos, w, h);
   }
+  
+  void display(int x, int y) {
+    image(pic, x, y, w, h);
+  }
 }

@@ -10,6 +10,9 @@ boolean hit; // Player runs into obstacle
 boolean startFrame; // Restarts frame count
 boolean controlSrc; // Directs you to the control screen
 boolean startScreen;
+PImage controls;
+PImage enter;
+PImage r;
 
 // Objects
 PlayerEl player;
@@ -86,6 +89,10 @@ void setup() {
   effect = "";
   secondsCount = 0;
   
+  //Images for Control Screen
+  controls = loadImage("Images/Controls/arrows.png");
+  enter = loadImage("Images/Controls/enter.png");
+  r = loadImage("Images/Controls/reset.png");
 }
 
 void draw() {
@@ -205,11 +212,29 @@ void draw() {
      hit = false;
   }
   
-  if (controlSrc == true) {
-    background(0,2,5);
-    textSize(128);
-    text("Controls", width/2, 100); 
-    
+  if (controlSrc == true) { //displays controls
+    background(255,255,255);
+    fill(0,0,0);
+    CactusEl c = new CactusEl();
+    CloudEl C = new CloudEl();
+    LongCactusEl l = new LongCactusEl();
+    TreeEl t = new TreeEl();
+    textSize(100);
+    text("Controls", width/2, 50); 
+    image(controls, width/8 - 50, height/8 ,350,300);
+    textSize(30);
+    text("Use the up and down keys for movement!", width * 3/16 + 50, height/3 + 120);
+    text("Avoid oncoming obstacles:", width * 3/16 + 50, height/3 + 170);
+    player.display(width/8 + 80, 50);
+    c.display(100, 3 * height/4);
+    C.display(200, 3 * height/4);
+    l.display(300, 3 * height/4);
+    t.display(450, 3 * height/4 - 20);
+    image(enter, width * 2/3 -50, height/8 + 90 ,150,150);
+    image(r, width * 2/3 + 150, height/8 + 90 ,150,150);
+    text("Use enter to resume the game and R to reset!", width * 12/16, height/3 + 120); 
+    text("Hitting a mystery box will grant you a random powerup:", width * 12/16, height/3 + 170);
+    text("drunk, invulnerability, highJump", width * 12/16, height/3 + 220);
   }
   
 }
