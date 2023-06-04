@@ -362,7 +362,7 @@ void keyPressed() {
       }
       else {
         fall();
-        System.out.println("Landing/Ducking!");
+        System.out.println("Landing!");
       }
     }
     else if(keyCode == RIGHT) {
