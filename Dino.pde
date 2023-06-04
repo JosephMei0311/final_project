@@ -329,8 +329,6 @@ void reset() {
   controlSrc = false;
   startScreen = false;
   
-  
-  
   // Stats
   score = 0;
   

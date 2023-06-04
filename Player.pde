@@ -48,7 +48,4 @@ class PlayerEl {
     imageMode(CORNER);
     image(dinoPic, x, y, radius, radius);
   }
-  
-  void swapTexture() {
-  }
 }

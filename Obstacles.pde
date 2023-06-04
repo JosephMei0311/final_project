@@ -13,10 +13,6 @@ public class ObstacleEl {
     pic = loadImage(textArray[textureType]);
   }
 
-
-  void swapTexture() {
-  }
-
   boolean hit(PlayerEl p) {
     return ((p.pos.x > xpos) && ((p.pos.x) < (xpos + w))) &&  (p.pos.y < (ypos + h)) && ((p.pos.y + p.radius) > ypos);
   }
