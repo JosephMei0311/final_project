@@ -292,9 +292,10 @@ void reset() {
   fill(0, 0, 0);
   textFont(font);
   textAlign(CENTER, CENTER);
-  text("lmao what a loser", width/2, height/2 - 125);
-  text("PRESS ENTER TO START", width/2, height/2 - 50);
-  text("Attempts: " + attempts, width/2, height/2 + 25);
+  text("lmao what a loser", width/2, height/2 - 175);
+  text("PRESS ENTER TO START", width/2, height/2 - 115);
+  text("Attempts: " + attempts, width/2, height/2 - 55);
+  text("Score: " + score + "     High Score: " + highScore, width/2, height/2 + 5);
 
   textSize(25);
   text("Kawaii", width/ (textNum + 1), height/2 + 150);
