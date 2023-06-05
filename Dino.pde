@@ -10,6 +10,7 @@ boolean hit; // Player runs into obstacle
 boolean startFrame; // Restarts frame count
 boolean controlSrc; // Directs you to the control screen
 boolean startScreen;
+boolean selectPower;
 PImage controls;
 PImage enter;
 PImage r;
@@ -31,10 +32,13 @@ boolean drunk;
 boolean jumpHigh;
 String effect;
 int secondsCount;
+int powerType; // Selects whether in power mode or not
+int opacPow;
 
 // Texture
 int textureType; // Selects the texture
 int textNum = 3; // # of texture packs
+int opacText;
 
 void setup() {
   // Initial setup
@@ -343,7 +347,19 @@ void reset() {
 void keyPressed() {
   if(key == CODED) {
     if (keyCode == UP) { 
-      if(drunk) {
+      if(!start) {
+        if(selectPower) {
+          selectPower = false;
+          opacPow = 50;
+          opacText = 75;
+        }
+        else {
+          selectPower = true;
+          opacText = 50;
+          opacPow = 75;
+        }
+      }   
+      else if(drunk) {
        fall();
        System.out.println("You're drunk! Going down!");
       }
@@ -355,8 +371,17 @@ void keyPressed() {
       }
       System.out.println("Going up!");
     }
+    
     else if (keyCode == DOWN) {
-      if (drunk) { // gives you unlimited up jumps oops
+      if(!start) {
+        if(selectPower) {
+          selectPower = false;
+        }
+        else {
+          selectPower = true;
+        }
+      }   
+      else if (drunk) { // gives you unlimited up jumps oops
         if(isGround){
           jump();
           isGround = false;
@@ -370,20 +395,33 @@ void keyPressed() {
     }
     else if(keyCode == RIGHT) {
       if(!start) {
-        if(textureType < textNum - 1)
-          textureType++;
-        else
-          textureType = 0;
+        if(selectPower) {
+         if(powerType < 1)
+          powerType++;
+         else
+          powerType = 0; 
+        }
+
+        else{
+          if(textureType < textNum - 1)
+            textureType++;
+          else
+            textureType = 0;
+        }
+          
         if(startScreen)
           setup();
-        else {
+        else 
           reset();
-        }
+        
       strokeWeight(5);
       rectMode(CENTER);
-      fill(0, 255, 255, 50);
+      fill(0, 255, 255, opacText);
       rect(width * (textureType + 1) / (textNum + 1), height / 2 + 150, 150, 50);
+      fill(0, 255, 255, opacPow);
+      rect(width * (powerType + 1) / 3, height / 2 + 200, 150, 50);
       System.out.println("change");
+        
       }
     }
     
@@ -399,6 +437,7 @@ void keyPressed() {
         else {
           reset();
         }
+        
         strokeWeight(5);
         rectMode(CENTER);
         fill(0, 255, 255, 50);
