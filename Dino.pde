@@ -51,7 +51,11 @@ void setup() {
   fill(0, 0, 0);
   textFont(font);
   textAlign(CENTER, CENTER);
-  text("PRESS ENTER TO START", width/2, height/2 - 50);
+  text("PRESS ENTER TO START", width/2, height/2 - 100);
+  fill(120);
+  textSize(23);
+  text("Press spacebar to view controls", width/2, height/2 - 25);
+  fill(0,0,0);
   
   textSize(25);
   text("Kawaii", width/ (textNum + 1), height/2 + 150);
@@ -204,10 +208,13 @@ void draw() {
    if(score % 50 == 0)
       speed += 0.1;
       
+
    if(drunk){
      noStroke();
      fill(0, 255, 0, 50);
      rect(0, 0, width, height);
+     strokeWeight(5);
+     stroke(5);
    }
     
    if(hit && !invulnerable){
@@ -296,9 +303,16 @@ void reset() {
   fill(0, 0, 0);
   textFont(font);
   textAlign(CENTER, CENTER);
-  text("lmao what a loser", width/2, height/2 - 125);
-  text("PRESS ENTER TO START", width/2, height/2 - 50);
-  text("Attempts: " + attempts, width/2, height/2 + 25);
+  fill(220,20,60);
+  text("lmao what a loser", width/2, height/2 - 175);
+  
+  text("PRESS ENTER TO START", width/2, height/2 - 115);
+  text("Attempts: " + attempts, width/2, height/2 - 55);
+  text("Score: " + score + "     High Score: " + highScore, width/2, height/2 + 5);
+  if (score > highScore) {
+    text("New High Score!", width/2, height/2 + 55);
+  }
+  
 
   textSize(25);
   text("Kawaii", width/ (textNum + 1), height/2 + 150);
