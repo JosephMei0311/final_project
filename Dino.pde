@@ -66,6 +66,8 @@ void setup() {
   rectMode(CENTER);
   fill(0, 255, 255, 50);
   rect(width * (textureType + 1) / (textNum + 1), height/2 + 150, 150, 50);
+  PlayerEl pp = new PlayerEl();
+  pp.display(width * (textureType + 1) / (textNum + 1) - 30, height / 2 + 40);
   
   // Kinematics
   gravity = new PVector(0, .5);
@@ -250,17 +252,18 @@ void controlScreen() { //displays controls
     LongCactusEl l = new LongCactusEl();
     TreeEl t = new TreeEl();
     textSize(100);
+    fill(25, 25, 112);
     textAlign(CENTER, CENTER);
     text("Controls", width/2, 50); 
     image(controls, width/8 - 50, height/8 ,350,300);
     textSize(30);
     text("Use the up and down keys for movement!", width * 3/16 + 50, height/3 + 120);
     text("Avoid oncoming obstacles:", width * 3/16 + 50, height/3 + 170);
-    player.display(width/8 + 80, 50);
-    c.display(100, 3 * height/4);
-    C.display(200, 3 * height/4);
+    player.display(width/8 + 85, 50);
+    c.display(75, 3 * height/4);
+    C.display(175, 3 * height/4);
     l.display(300, 3 * height/4);
-    t.display(450, 3 * height/4 - 20);
+    t.display(455, 3 * height/4 - 20);
     image(enter, width * 2/3 - 50, height/8 + 90 ,150,150);
     image(r, width * 2/3 + 150, height/8 + 90 ,150,150);
     text("Use enter to resume the game and R to reset!", width * 12/16, height/3 + 120); 
@@ -304,16 +307,20 @@ void reset() {
   textFont(font);
   textAlign(CENTER, CENTER);
   fill(220,20,60);
-  text("lmao what a loser", width/2, height/2 - 175);
-  
+  textSize(80);
+  text("LMAO what a loser", width/2, height/2 - 210);
+  textSize(40);
+  fill(120);
   text("PRESS ENTER TO START", width/2, height/2 - 115);
-  text("Attempts: " + attempts, width/2, height/2 - 55);
-  text("Score: " + score + "     High Score: " + highScore, width/2, height/2 + 5);
+  fill(25, 25, 112);
+  text("Attempts: " + attempts, width/2 - 240, height/2 - 50);
+  text("Score: " + score + "     High Score: " + highScore, width/2 + 125, height/2 - 50);
   if (score > highScore) {
+    fill(0, 163, 108);
     text("New High Score!", width/2, height/2 + 55);
   }
   
-
+  fill(0,0,0);
   textSize(25);
   text("Kawaii", width/ (textNum + 1), height/2 + 150);
   text("Pokemon", width * 2 / (textNum + 1), height/2 + 150);
@@ -431,6 +438,7 @@ void keyPressed() {
       strokeWeight(5);
       rectMode(CENTER);
       fill(0, 255, 255, opacText);
+      player.display(width * (textureType + 1) / (textNum + 1) - 30, height / 2 + 40);
       rect(width * (textureType + 1) / (textNum + 1), height / 2 + 150, 150, 50);
       fill(0, 255, 255, opacPow);
       rect(width * (powerType + 1) / 3, height / 2 + 200, 150, 50);
@@ -455,6 +463,7 @@ void keyPressed() {
         strokeWeight(5);
         rectMode(CENTER);
         fill(0, 255, 255, 50);
+        player.display(width * (textureType + 1) / (textNum + 1) - 30, height / 2 + 40);
         rect(width * (textureType + 1) / (textNum + 1), height/2 + 150, 150, 50);
         System.out.println("change");
       }

@@ -36,12 +36,6 @@ class PowerUpsEl {
     }
   }
 
-  //void drunk() {
-  //  if (hit) {
-  //    drunk = true;
-  //  }
-  //}
-
   //void shrinkShroom() {
   //  if (hit) {
   //    radius = 10;
