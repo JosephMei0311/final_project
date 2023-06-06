@@ -24,16 +24,20 @@ class PowerUpsEl {
   void specialEffects(int num) {
    if(num == 0) {
      drunk = true;
-     effect = "drunk";
+     effect = "Drunk";
    }
    else if(num == 1) {
      invulnerable = true;
-     effect = "invulnerable";
+     effect = "Invulnerable";
    }
    else if(num == 2) {
      jumpHigh = true;
      effect = "High Jump";
     }
+   else if(num == 3) {
+     shrinkShroom = true;
+     effect = "Shrink";
+  }
   }
 
   //void shrinkShroom() {

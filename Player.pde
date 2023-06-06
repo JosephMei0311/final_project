@@ -35,6 +35,10 @@ class PlayerEl {
   
   void display() {
     imageMode(CORNER);
+    if(shrinkShroom)
+      radius = 40;
+    else
+      radius = 80;
     image(dinoPic, pos.x, pos.y, radius, radius);
     
     if(invulnerable) {

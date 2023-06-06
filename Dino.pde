@@ -10,7 +10,7 @@ boolean hit; // Player runs into obstacle
 boolean startFrame; // Restarts frame count
 boolean controlSrc; // Directs you to the control screen
 boolean startScreen;
-boolean selectPower;
+boolean selectPower = false;
 PImage controls;
 PImage enter;
 PImage r;
@@ -30,16 +30,14 @@ int highScore;
 boolean invulnerable;
 boolean drunk;
 boolean jumpHigh;
-//boolean shrink;
+boolean shrinkShroom;
 String effect;
 int secondsCount;
 int powerType; // Selects whether in power mode or not
-int opacPow;
 
 // Texture
 int textureType; // Selects the texture
 int textNum = 3; // # of texture packs
-int opacText;
 
 void setup() {
   // Initial setup
@@ -63,10 +61,27 @@ void setup() {
   text("Pokemon", width * 2 / (textNum + 1), height/2 + 150);
   text("Minecraft", width * 3 / (textNum + 1), height/2 + 150);
   
+  text("PowerUps", width / 3, height/2 + 220);
+  text("No PowerUps", width * 2 / 3, height/2 + 220);
+  
   strokeWeight(5);
   rectMode(CENTER);
-  fill(0, 255, 255, 50);
+  fill(255, 0, 255, 50);
   rect(width * (textureType + 1) / (textNum + 1), height/2 + 150, 150, 50);
+  
+  fill(0, 255, 255, 50);
+  rect(width * (powerType + 1) / 3, height/2 + 220, 175, 50);
+  
+  if(selectPower) {
+    line(width * (powerType + 1) / 3 - 88, height/2 + 220, width * (powerType + 1) / 3 - 97, height/2 + 230);
+    line(width * (powerType + 1) / 3 - 88, height/2 + 220, width * (powerType + 1) / 3 - 97, height/2 + 210);
+  }
+  
+  else {
+    line(width * (textureType + 1) / (textNum + 1) - 75, height/2 + 150, width * (textureType + 1) / (textNum + 1) - 85, height/2 + 160);
+    line(width * (textureType + 1) / (textNum + 1) - 75, height/2 + 150, width * (textureType + 1) / (textNum + 1) - 85, height/2 + 140);
+  }
+  
   PlayerEl pp = new PlayerEl();
   pp.display(width * (textureType + 1) / (textNum + 1) - 30, height / 2 + 40);
   
@@ -98,7 +113,7 @@ void setup() {
   invulnerable = false;
   drunk = false;
   jumpHigh = false;
-  //shrink = false;
+  shrinkShroom = false;
   effect = "";
   secondsCount = 0;
   
@@ -179,7 +194,8 @@ void draw() {
             obsarr.remove(i);
           }
     }
-        
+    
+    if(powerType == 0) {
     if(random(1) < 0.25 && frameCount % 200 == 0) {
       powerUparr.add(new PowerUpsEl());
     }
@@ -188,7 +204,7 @@ void draw() {
       PowerUpsEl power = powerUparr.get(i);
       
        if(power.hit(player)){
-         int randNum = int(random(3));
+         int randNum = int(random(4));
          secondsCount = 5;
          power.specialEffects(randNum);
          powerUparr.remove(i);
@@ -203,18 +219,13 @@ void draw() {
       }
     }
     
-   if((drunk == true || invulnerable == true  || jumpHigh == true) && secondsCount == 0){
+   if((drunk == true || invulnerable == true || jumpHigh == true || shrinkShroom == true) && secondsCount == 0){
      drunk = false;
      invulnerable = false;
      jumpHigh = false;
-     //|| shrink == true
-     // shrink = false;
+     shrinkShroom = false;
    }
    
-   if(score % 50 == 0)
-      speed += 0.1;
-      
-
    if(drunk){
      noStroke();
      fill(0, 255, 0, 50);
@@ -222,10 +233,10 @@ void draw() {
      strokeWeight(5);
      stroke(5);
    }
+   }
    
-   //if (shrink) {
-   //  player.radius = 40;
-   //}
+   if(score % 50 == 0)
+      speed += 0.1;
     
    if(hit && !invulnerable){
      attempts++;
@@ -321,9 +332,9 @@ void reset() {
   textSize(40);
   fill(120);
   text("PRESS ENTER TO START", width/2, height/2 - 115);
+  textSize(35);
   fill(25, 25, 112);
-  text("Attempts: " + attempts, width/2 - 240, height/2 - 50);
-  text("Score: " + score + "     High Score: " + highScore, width/2 + 125, height/2 - 50);
+  text("Attempts: " + attempts + "             Score: " + score + "     High Score: " + highScore, width/2, height/2 - 50);
   if (score > highScore) {
     fill(0, 163, 108);
     text("New High Score!", width/2, height/2 + 55);
@@ -334,15 +345,35 @@ void reset() {
   text("Kawaii", width/ (textNum + 1), height/2 + 150);
   text("Pokemon", width * 2 / (textNum + 1), height/2 + 150);
   text("Minecraft", width * 3 / (textNum + 1), height/2 + 150);
+  text("PowerUps", width / 3, height/2 + 220);
+  text("No PowerUps", width * 2 / 3, height/2 + 220);
+  
   
   strokeWeight(5);
   rectMode(CENTER);
-  fill(0, 255, 255, 50);
+  fill(255, 0, 255, 50);
   rect(width * (textureType + 1) / (textNum + 1), height/2 + 150, 150, 50);
   
+  fill(0, 255, 255, 50);
+  rect(width * (powerType + 1) / 3, height/2 + 220, 175, 50);
+  
+  if(selectPower) {
+    line(width * (powerType + 1) / 3 - 88, height/2 + 220, width * (powerType + 1) / 3 - 97, height/2 + 230);
+    line(width * (powerType + 1) / 3 - 88, height/2 + 220, width * (powerType + 1) / 3 - 97, height/2 + 210);
+  }
+  
+  else {
+    line(width * (textureType + 1) / (textNum + 1) - 75, height/2 + 150, width * (textureType + 1) / (textNum + 1) - 85, height/2 + 160);
+    line(width * (textureType + 1) / (textNum + 1) - 75, height/2 + 150, width * (textureType + 1) / (textNum + 1) - 85, height/2 + 140);
+  }
+  
+  PlayerEl pp = new PlayerEl();
+  pp.display(width * (textureType + 1) / (textNum + 1) - 30, height / 2 + 40);
+  
+  
   // Change high score on reset
-  if(score > highScore)
-    highScore = score;
+  //if(score > highScore)
+  //  highScore = score;
   
   // Re-create objects
   player = new PlayerEl();
@@ -364,12 +395,13 @@ void reset() {
   startScreen = false;
   
   // Stats
-  score = 0;
+  //score = 0;
   
   // Powerups
   invulnerable = false;
   drunk = false;
   jumpHigh = false;
+  shrinkShroom = false;
   secondsCount = 0;
   effect = "";
 }
@@ -380,15 +412,16 @@ void keyPressed() {
       if(!start) {
         if(selectPower) {
           selectPower = false;
-          opacPow = 50;
-          opacText = 75;
         }
         else {
           selectPower = true;
-          opacText = 50;
-          opacPow = 75;
         }
-      }   
+        if(startScreen)
+          setup();
+        else {
+          reset();
+        }
+      }
       else if(drunk) {
        fall();
        System.out.println("You're drunk! Going down!");
@@ -409,6 +442,11 @@ void keyPressed() {
         }
         else {
           selectPower = true;
+        }
+       if(startScreen)
+          setup();
+        else {
+          reset();
         }
       }   
       else if (drunk) { // gives you unlimited up jumps oops
@@ -444,37 +482,33 @@ void keyPressed() {
         else 
           reset();
         
-      strokeWeight(5);
-      rectMode(CENTER);
-      fill(0, 255, 255, opacText);
-      player.display(width * (textureType + 1) / (textNum + 1) - 30, height / 2 + 40);
-      rect(width * (textureType + 1) / (textNum + 1), height / 2 + 150, 150, 50);
-      fill(0, 255, 255, opacPow);
-      rect(width * (powerType + 1) / 3, height / 2 + 200, 150, 50);
       System.out.println("change");
         
       }
     }
     
     else if(keyCode == LEFT) {
-      if(!start) {
-        if(textureType != 0)
-          textureType--;
-        else
-          textureType = textNum - 1;
+      if(!start) {          
+        if(selectPower) {
+         if(powerType > 0)
+          powerType--;
+         else
+          powerType = 1; 
+        }
+
+        else{
+          if(textureType > 0)
+            textureType--;
+          else
+            textureType = textNum - 1;
+        }
+          
           
         if(startScreen)
           setup();
         else {
           reset();
         }
-        
-        strokeWeight(5);
-        rectMode(CENTER);
-        fill(0, 255, 255, 50);
-        player.display(width * (textureType + 1) / (textNum + 1) - 30, height / 2 + 40);
-        rect(width * (textureType + 1) / (textNum + 1), height/2 + 150, 150, 50);
-        System.out.println("change");
       }
     }
   }
@@ -485,9 +519,16 @@ void keyPressed() {
     else if (key == ENTER) {
       start = true;
       controlSrc = false;
+      if(score > highScore)
+        highScore = score;
+      score = 0;
     }
     else if (key == ' ') {
       start = false;
       controlSrc = true;
+    }
+    
+    else if (key == 'e') {
+      System.out.println(powerType);
     }
   }
