@@ -30,6 +30,7 @@ int highScore;
 boolean invulnerable;
 boolean drunk;
 boolean jumpHigh;
+//boolean shrink;
 String effect;
 int secondsCount;
 int powerType; // Selects whether in power mode or not
@@ -97,6 +98,7 @@ void setup() {
   invulnerable = false;
   drunk = false;
   jumpHigh = false;
+  //shrink = false;
   effect = "";
   secondsCount = 0;
   
@@ -205,6 +207,8 @@ void draw() {
      drunk = false;
      invulnerable = false;
      jumpHigh = false;
+     //|| shrink == true
+     // shrink = false;
    }
    
    if(score % 50 == 0)
@@ -218,6 +222,10 @@ void draw() {
      strokeWeight(5);
      stroke(5);
    }
+   
+   //if (shrink) {
+   //  player.radius = 40;
+   //}
     
    if(hit && !invulnerable){
      attempts++;
@@ -269,6 +277,7 @@ void controlScreen() { //displays controls
     text("Use enter to resume the game and R to reset!", width * 12/16, height/3 + 120); 
     text("Hitting a mystery box will grant you a random powerup:", width * 12/16, height/3 + 170);
     text("drunk, invulnerability, highJump", width * 12/16, height/3 + 220);
+    text("The duration and powerup type will appear in the top left", width * 12/16, height/3 + 270);
 }
 
 void countDownAndDisplay() {
