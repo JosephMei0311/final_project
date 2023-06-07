@@ -334,10 +334,10 @@ void reset() {
   text("PRESS ENTER TO START", width/2, height/2 - 115);
   textSize(35);
   fill(25, 25, 112);
-  text("Attempts: " + attempts + "             Score: " + score + "     High Score: " + highScore, width/2, height/2 - 50);
+  text("Attempts: " + attempts + "        Score: " + score + "        High Score: " + highScore, width/2, height/2 - 50);
   if (score > highScore) {
     fill(0, 163, 108);
-    text("New High Score!", width/2, height/2 + 55);
+    text("New High Score!", width/2, height/2);
   }
   
   fill(0,0,0);
