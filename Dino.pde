@@ -374,11 +374,6 @@ void reset() {
   PlayerEl pp = new PlayerEl();
   pp.display(width * (textureType + 1) / (textNum + 1) - 30, height / 2 + 40);
   
-  
-  // Change high score on reset
-  //if(score > highScore)
-  //  highScore = score;
-  
   // Re-create objects
   player = new PlayerEl();
   bgarr = new ArrayList<BackgroundEl>();
@@ -397,9 +392,6 @@ void reset() {
   hit = false;
   controlSrc = false;
   startScreen = false;
-  
-  // Stats
-  //score = 0;
   
   // Powerups
   invulnerable = false;
