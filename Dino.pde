@@ -287,7 +287,11 @@ void controlScreen() { //displays controls
     image(r, width * 2/3 + 150, height/8 + 90 ,150,150);
     text("Use enter to resume the game and R to reset!", width * 12/16, height/3 + 120); 
     text("Hitting a mystery box will grant you a random powerup:", width * 12/16, height/3 + 170);
-    text("drunk, invulnerability, highJump", width * 12/16, height/3 + 220);
+    textSize(25);
+    fill(120, 150, 80);
+    text("Drunk, Invulnerability, High Jump, and Shrink", width * 12/16, height/3 + 220);
+    textSize(30);
+    fill(25, 25, 112);
     text("The duration and powerup type will appear in the top left", width * 12/16, height/3 + 270);
 }
 
